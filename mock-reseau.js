@@ -1,6 +1,6 @@
 /* Réseau simulé pour la démo hors ligne (simulateur.html). Utilisé seulement avec ?mock dans l'adresse. */
 (() => {
-  const bc = new BroadcastChannel("vandb-quizz-demo");
+  const bc = new BroadcastChannel("tlop-demo");
   const all = new Set();
   class Emitter { constructor(){this._h={}} on(e,f){(this._h[e]=this._h[e]||[]).push(f);return this} emit(e,...a){(this._h[e]||[]).forEach(f=>{try{f(...a)}catch(x){console.error(x)}})} }
   class Conn extends Emitter { constructor(peer,remote,id){super();this.peer=peer;this.remote=remote;this.connectionId=id;this.open=false;}

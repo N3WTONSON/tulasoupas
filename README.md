@@ -49,7 +49,7 @@ Chaque joueur a un **code joueur** (page « Classement de la saison ») pour ret
 - Sans quiz perso : réglages → « Banque de questions » + choix des thèmes.
 
 ## Habillage et loi Évin
-- Couleurs et typographies des visuels V and B (brun-noir, orange, jaune, bleu-vert, crème), logo conservé.
+- Thème néon / arcade TuL’asOuPas ? (fond #0d0f17, violet #8b5cf6, cyan #06b6d4, rose #ec4899), polices Outfit, Orbitron et Bungee.
 - 25 avatars illustrés originaux au choix des joueurs (aucun ne représente de l'alcool) + 10 couleurs.
 - Thèmes Vins / Bières & spiritueux / Cocktails décochés par défaut : à cocher volontairement.
 - Message « L'abus d'alcool est dangereux pour la santé, à consommer avec modération. » sur l'accueil, la salle d'attente,

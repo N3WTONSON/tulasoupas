@@ -4,7 +4,7 @@
 window.QB_CONFIG = {
   // Organisateur affiché dans les conditions d'utilisation (à compléter).
   ORGANISATEUR: {
-    nom: "",       // ex. "SAS Exemple — V and B Ville"
+    nom: "",       // ex. "SAS Exemple — Le Comptoir"
     adresse: "",   // ex. "12 rue Exemple, 75000 Paris"
     contact: ""    // ex. "contact@exemple.fr"
   },
