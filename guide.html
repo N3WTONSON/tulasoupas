@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0d0f17">
+<meta name="robots" content="noindex">
+<link rel="icon" href="logo.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<title>Mode d'emploi staff · TuL’asOuPas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Bungee&family=Orbitron:wght@600;800;900&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fbead3;--bg2:#fff8ee;--card:rgba(29,23,20,.05);--line:rgba(29,23,20,.16);--text:#1d1714;--muted:#6d5a4b;
+  --gold:#f6c21c;--wine:#e8602c;--teal:#2f8a85;--cream:#fbead3;--ink:#1d1714;--acc:#b9441c}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{background:var(--bg);color:var(--text);font:16px/1.6 "Open Sans",system-ui,-apple-system,"Segoe UI",sans-serif;padding:0 16px 60px}
+body::before{content:"";position:fixed;z-index:20;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,var(--wine) 0 25%,var(--gold) 25% 50%,var(--teal) 50% 75%,var(--ink) 75%)}
+main{max-width:820px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
+h1,h2,h3{font-weight:800;text-transform:uppercase;letter-spacing:.01em;line-height:1.15}
+h1{font-size:clamp(1.7rem,6vw,2.4rem)}
+h1 em{font-style:normal;color:var(--wine)}
+h2{font-size:1.25rem;color:var(--acc);display:flex;align-items:center;gap:10px}
+h2 .n{font-family:Alegreya,Georgia,serif;font-variant-numeric:lining-nums;background:var(--wine);color:#fff;border-radius:50%;width:1.8em;height:1.8em;display:inline-grid;place-items:center;font-size:.85em;flex:none}
+h3{font-size:.95rem;color:var(--ink);margin-top:4px}
+p,li{color:var(--muted)}
+b,strong{color:var(--text)}
+a{color:var(--acc)}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:20px 0 6px}
+.logo{width:150px;height:auto;display:block}
+.btn{display:inline-flex;align-items:center;gap:6px;background:var(--gold);color:var(--ink);font-weight:800;text-transform:uppercase;letter-spacing:.03em;text-decoration:none;border:0;border-radius:10px;padding:10px 16px;box-shadow:0 4px 0 #b98f0d;cursor:pointer;font-size:.9rem;font-family:inherit}
+.btn.ghost{background:transparent;color:var(--text);border:2px solid var(--line);box-shadow:none;text-transform:none;letter-spacing:0;font-weight:700}
+.lead{font-size:1.05rem}
+nav{position:sticky;top:5px;z-index:10;background:var(--bg);padding:8px 0;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid var(--line)}
+nav::-webkit-scrollbar{display:none}
+nav a{flex:none;text-decoration:none;color:var(--muted);font-weight:700;font-size:.85rem;padding:6px 12px;border-radius:999px;border:1px solid var(--line)}
+nav a:hover{color:var(--ink);background:var(--gold);border-color:transparent}
+section{background:var(--bg2);border-radius:16px;padding:18px 18px 20px;display:flex;flex-direction:column;gap:12px}
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.flow div{background:var(--card);border-radius:12px;padding:12px;border-top:5px solid var(--c)}
+.flow b{display:block;font-size:.95rem;text-transform:uppercase}
+.flow span{font-size:.85rem;color:var(--muted)}
+@media (max-width:640px){.flow{grid-template-columns:1fr 1fr}}
+ol.steps{list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:8px}
+ol.steps>li{counter-increment:s;position:relative;padding:10px 12px 10px 48px;background:var(--card);border-radius:12px}
+ol.steps>li::before{content:counter(s);position:absolute;left:10px;top:9px;width:28px;height:28px;border-radius:50%;background:var(--gold);color:var(--ink);font-weight:800;display:grid;place-items:center;font-size:.9rem}
+ul{padding-left:20px;display:flex;flex-direction:column;gap:4px}
+.ui,.flow span.ui{display:inline-block;background:var(--ink);color:var(--cream);font-weight:700;font-size:.85em;padding:0 7px;border-radius:6px;white-space:nowrap}
+kbd{display:inline-block;border:1px solid var(--line);border-bottom-width:3px;border-radius:6px;padding:0 6px;font:inherit;font-size:.85em;color:var(--text)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:640px){.two{grid-template-columns:1fr}}
+.card{background:var(--card);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:6px}
+.card h3{margin:0}
+.tip{border-left:4px solid var(--teal);background:rgba(47,138,133,.14);border-radius:10px;padding:10px 12px;color:var(--text)}
+.warn{border-left:4px solid var(--wine);background:rgba(232,96,44,.14);border-radius:10px;padding:10px 12px;color:var(--text)}
+.check{list-style:none;padding:0;gap:6px}
+.check label{display:flex;gap:10px;align-items:flex-start;background:var(--card);border-radius:10px;padding:9px 12px;cursor:pointer;color:var(--text)}
+.check input{width:20px;height:20px;flex:none;margin-top:2px;accent-color:var(--gold)}
+.check input:checked+span{color:var(--muted);text-decoration:line-through}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+th,td{text-align:left;vertical-align:top;padding:9px 10px;border-bottom:1px solid var(--line)}
+th{color:var(--acc);text-transform:uppercase;font-size:.75rem;letter-spacing:.08em}
+td:first-child{color:var(--text);font-weight:700;width:38%}
+td{color:var(--muted)}
+.pts{display:flex;flex-wrap:wrap;gap:6px}
+.pts span{background:var(--card);border-radius:8px;padding:4px 10px;font-size:.88rem;color:var(--text)}
+.pts b{font-family:Alegreya,Georgia,serif;font-variant-numeric:lining-nums;color:var(--acc);margin-left:4px}
+.legal{text-align:center;font-size:.8rem;color:var(--muted);margin-top:8px}
+@media print{body::before,nav,.no-print{display:none!important}body{background:#fff;color:#000}section{break-inside:avoid;background:#fff;border:1px solid #ccc}p,li,td{color:#222}h2,th{color:#b84a1c}.ui{border:1px solid #999}}
+
+/* ===== TuL’asOuPas ? : thème néon ===== */
+:root{--bg:#0d0f17;--bg2:#141729;--card:rgba(255,255,255,.04);--line:rgba(167,139,250,.24);--text:#eef0ff;--muted:#9ba3c7;
+  --gold:#22d3ee;--wine:#ec4899;--teal:#06b6d4;--cream:#eef0ff;--ink:#0d0f17;--acc:#22d3ee;--violet:#8b5cf6;--pink:#ec4899;--cyan:#06b6d4}
+html,body{background:var(--bg)!important;color:var(--text)}
+body{font-family:"Outfit",system-ui,-apple-system,"Segoe UI",sans-serif!important;background:radial-gradient(1000px 600px at 5% -10%,rgba(139,92,246,.18),transparent 60%),radial-gradient(900px 600px at 105% 10%,rgba(6,182,212,.12),transparent 60%),var(--bg)!important;background-attachment:fixed!important}
+body::before{height:3px!important;background:linear-gradient(90deg,var(--violet),var(--cyan) 50%,var(--pink))!important;box-shadow:0 0 14px rgba(139,92,246,.8)}
+h1,h2,h3{font-family:"Outfit",system-ui,sans-serif!important;letter-spacing:.03em}
+h1 em{color:var(--pink)!important}
+.logo{filter:drop-shadow(0 0 14px rgba(139,92,246,.5))}
+a{color:#22d3ee}
+.btn,.back{background:linear-gradient(135deg,#8b5cf6,#ec4899)!important;color:#fff!important;box-shadow:0 8px 22px -8px rgba(139,92,246,.9)!important;border-radius:12px}
+.btn.ghost{background:rgba(255,255,255,.04)!important;border:1px solid var(--line)!important;box-shadow:none!important}
+
+nav{background:rgba(13,15,23,.9)!important;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+nav a:hover{background:var(--violet)!important;color:#fff!important}
+section{background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.015))!important;border:1px solid rgba(255,255,255,.07)}
+h2{color:#22d3ee!important}
+h2 .n{background:linear-gradient(135deg,#8b5cf6,#ec4899)!important;font-family:"Orbitron",sans-serif!important;box-shadow:0 0 14px rgba(236,72,153,.5)}
+h3{color:var(--text)!important}
+ol.steps>li::before{background:var(--violet)!important;color:#fff!important;box-shadow:0 0 12px rgba(139,92,246,.6)}
+.ui,.flow span.ui{background:rgba(139,92,246,.22)!important;color:#e9e5ff!important;border:1px solid rgba(139,92,246,.45)}
+.tip{background:rgba(6,182,212,.1)!important;border-left-color:#06b6d4!important}
+.warn{background:rgba(236,72,153,.1)!important;border-left-color:#ec4899!important}
+.check input{accent-color:#8b5cf6}
+th{color:#22d3ee!important}
+.pts b{font-family:"Orbitron",sans-serif!important;color:#22d3ee!important}
+code{background:rgba(255,255,255,.07);color:#22d3ee;border-radius:5px;padding:0 5px}
+</style>
+</head>
+<body>
+<main>
+  <div class="top">
+    <img class="logo" src="logo.png" alt="TuL’asOuPas ?">
+    <div class="no-print" style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end">
+      <button class="btn ghost" onclick="print()">🖨️ Imprimer</button>
+      <a class="btn" href="./">← Retour au jeu</a>
+    </div>
+  </div>
+  <h1>Mode d'emploi <em>staff</em></h1>
+  <p class="lead">Tout ce qu'il faut pour animer une soirée quiz au V and B. L'écran TV montre les questions, les clients répondent sur leur téléphone, vous animez au micro.</p>
+
+  <nav aria-label="Sommaire">
+    <a href="#bref">En bref</a><a href="#avant">Avant</a><a href="#lancer">Lancer</a><a href="#pendant">Pendant</a><a href="#quiz">Préparer un quiz</a><a href="#saison">Saison</a><a href="#evin">Loi Évin</a><a href="#depannage">Dépannage</a><a href="#resp">Responsable</a>
+  </nav>
+
+  <section id="bref">
+    <h2><span class="n">1</span>En bref</h2>
+    <div class="flow">
+      <div style="--c:var(--wine)"><b>Lancer</b><span>Accueil → <span class="ui">Lancer la partie (animateur)</span></span></div>
+      <div style="--c:var(--gold)"><b>Accueillir</b><span>Les clients scannent le QR code de la TV</span></div>
+      <div style="--c:var(--teal)"><b>Jouer</b><span><span class="ui">Lancer la partie ▶</span> puis <kbd>Espace</kbd> à chaque étape</span></div>
+      <div style="--c:var(--cream)"><b>Podium</b><span>Les points de saison sont comptés tout seuls</span></div>
+    </div>
+    <p>Aucun client n'a d'application à installer ni de compte à créer. Ils choisissent un nom, un avatar et une couleur, et acceptent les conditions d'utilisation.</p>
+  </section>
+
+  <section id="avant">
+    <div class="row"><h2><span class="n">2</span>Avant la soirée</h2><button class="btn ghost no-print" id="reset" type="button">Tout décocher</button></div>
+    <ul class="check" id="checklist">
+      <li><label><input type="checkbox"><span>Ordinateur du bar branché à la TV ou au vidéoprojecteur en <b>écran étendu</b> (Windows <kbd>⊞</kbd> + <kbd>P</kbd> → Étendre).</span></label></li>
+      <li><label><input type="checkbox"><span>Le site est ouvert sur l'ordinateur (adresse en <b>github.io</b>, pas un fichier local).</span></label></li>
+      <li><label><input type="checkbox"><span>Wi-Fi du bar en marche ; le code Wi-Fi est affiché pour les clients.</span></label></li>
+      <li><label><input type="checkbox"><span>Quiz choisi : banque de questions, Quiz express ou quiz préparé (voir « Préparer un quiz »).</span></label></li>
+      <li><label><input type="checkbox"><span>Micro prêt : c'est l'animateur qui lit les questions, l'appli n'a pas de voix.</span></label></li>
+      <li><label><input type="checkbox"><span>Lots annoncés : <b>jamais de boisson alcoolisée</b> (voir « Loi Évin »).</span></label></li>
+      <li><label><input type="checkbox"><span>Optionnel : votre téléphone en <b>télécommande</b> pour animer depuis la salle.</span></label></li>
+    </ul>
+  </section>
+
+  <section id="lancer">
+    <h2><span class="n">3</span>Lancer la partie</h2>
+    <p class="tip">🍷 <b>Staff VandB</b> : identifiez-vous avec le nom <b>« VandB »</b> (accueil → 👤 Identifiez-vous ; tout le staff utilise ce nom) : parties du bar et classement de la saison retrouvés sur n'importe quel appareil. <b>Sauvegarde automatique</b> : le responsable crée une fois un <b>code staff</b> (accueil → 🛠️ Créer / modifier mes quiz → ☁️ Réglages de la sauvegarde → « Activer pour le staff ») ; sur chaque nouvel appareil, cliquez « ☁️ Activer la sauvegarde automatique » sur l'accueil et tapez ce code, une seule fois.</p>
+    <p>🏠 Accueil : <span class="ui">📺 Lancer la partie</span>, juste dessous <span class="ui">🛠️ Créer / modifier mes quiz</span>, puis <span class="ui">🏆 Classement de la saison</span>. <span class="ui">🤖 Libre-service</span> lance une partie qui tourne toute seule, sans animateur (voir C ci-dessous). Le menu <span class="ui">☰ Plus d'options</span> contient le mode écran unique (tablette), Mes parties et la télécommande animateur.</p>
+    <p>👤 <b>Identifiez-vous</b> sur l'accueil avec votre prénom d'animateur. Sur n'importe quel appareil, <span class="ui">📂 Mes parties</span> avec le même nom affiche vos parties (en cours ou terminées, avec le podium) et permet de <b>reprendre</b> une partie en cours sur un autre appareil. Nécessite la sauvegarde en ligne (jeton GitHub) sur l'appareil qui lance les parties.</p>
+    <div class="two">
+      <div class="card">
+        <h3>A · Ordinateur + TV (conseillé)</h3>
+        <ol class="steps">
+          <li>Accueil → <span class="ui">📺 Lancer la partie (animateur)</span>. L'ordinateur affiche la <b>régie</b> et une 2e fenêtre « écran TV » s'ouvre.</li>
+          <li>Glissez la fenêtre TV sur le vidéoprojecteur, cliquez dedans : elle passe en plein écran. Fenêtre bloquée ? Autorisez les pop-up, puis <span class="ui">📺 Ouvrir l'écran TV</span>.</li>
+          <li>Les clients scannent le QR code (ou tapent le code à 4 lettres sur le site).</li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>B · Tablette seule branchée à la TV</h3>
+        <ol class="steps">
+          <li>Accueil → <span class="ui">📱 Mode écran unique (tablette)</span>.</li>
+          <li>Réglages : bouton <b>⚙️</b> en haut à droite de l'écran.</li>
+          <li>Pilotez depuis votre téléphone avec la télécommande (ci-dessous).</li>
+        </ol>
+        <p class="tip">iPhone / iPad : Safari → <b>Partager</b> → <b>Sur l'écran d'accueil</b>, puis ouvrez l'icône TuL’asOuPas. L'appli s'ouvre alors en plein écran.</p>
+      </div>
+    </div>
+    <div class="card">
+      <h3>C · Libre-service : sans animateur 🤖</h3>
+      <ol class="steps">
+        <li>Sur l'ordinateur, la tablette ou la Smart TV branché(e) à l'écran : Accueil → <span class="ui">🤖 Libre-service (sans animateur)</span>. Astuce : mettez en favori l'adresse du site suivie de <b>?libre</b> (ex. <code>…/Quizz/?libre</code>) : la TV démarre directement en libre-service et <b>reprend la partie en cours</b> après un redémarrage.</li>
+        <li>Appuyez <b>une fois</b> sur OK (ou cliquez) dans la page : sans ce geste, le navigateur bloque le son du blind test. Si le bouton « 🔊 autoriser le son » s'affiche, il est déjà sélectionné : OK suffit.</li>
+        <li>Les clients scannent le QR code et appuient sur <b>✋ Je suis prêt</b> sur leur téléphone. La TV affiche « Joueurs prêts : 2 / 3 ». <b>Quand tous les joueurs connectés sont prêts</b> (2 joueurs minimum par défaut), la partie démarre 5 s plus tard. Un joueur peut annuler son « prêt » tant que la partie n'a pas commencé. <b>Joueur inactif</b> : dès qu'un joueur est prêt, ceux qui ne le sont pas ont <b>1 min</b> pour appuyer (avertissement ⏳ sur leur téléphone, qui vibre, et sur la TV). Passé ce délai, ils sont <b>retirés</b> de la salle d'attente et la partie peut partir ; ils peuvent revenir d'un appui sur « Rejoindre la partie ».</li>
+        <li>Les questions s'enchaînent toutes seules. À la fin : podium et classement de la saison, puis <b>retour automatique</b> en salle d'attente : chacun réappuie sur ✋ Je suis prêt pour la partie suivante.</li>
+        <li>Par défaut, les parties <b>alternent quiz et blind test</b> (toutes catégories, questions jamais vues en priorité). Plus aucun joueur connecté pendant 1 min : retour en salle d'attente.</li>
+      </ol>
+      <p class="tip">Réglages ⚙️ (ou télécommande) → rubrique <b>🤖 Libre-service</b> : nombre de joueurs minimum, <b>questions par quiz</b> (15 par défaut), <b>extraits par blind test</b> (10 par défaut), type de parties (alternance, quiz, blind test ou votre quiz), durée de l'écran de fin. Le staff peut toujours lancer, mettre en pause ou arrêter depuis la télécommande.</p>
+    </div>
+    <div class="card">
+      <h3>📺 Télécommande de la TV</h3>
+      <p>Sur une Smart TV (ou un ordinateur sans souris), les <b>flèches</b> passent <b>de bouton en bouton</b> (le bouton choisi est entouré d'orange), <b>OK</b> clique, <b>Retour</b> ferme la fenêtre de réglages. Sur une liste de choix (nombre de questions, joueurs…), <b>◀ ▶</b> changent la valeur. Les réglages ⚙️ sont en haut à droite de l'écran.</p>
+    </div>
+    <div class="card">
+      <h3>Télécommande sur votre téléphone</h3>
+      <p>Dans la régie : <span class="ui">🎛️ Télécommande</span> → scannez le QR code avec votre téléphone (le PIN est rempli tout seul). Sinon, Accueil → <span class="ui">🎛️ Télécommande animateur</span>, saisissez le code de la partie puis le PIN affiché dans ⚙️ Réglages. Vous pouvez lancer, avancer, voir la bonne réponse avant tout le monde et exclure un joueur.</p>
+    </div>
+  </section>
+
+  <section id="pendant">
+    <h2><span class="n">4</span>Pendant la partie</h2>
+    <p>📡 <b>Caster l'écran</b> : bouton <span class="ui">📡 Caster</span> dans la régie (ou ⚙️ sur la tablette). Chromecast : choisissez la TV dans la liste (Chrome, même Wi-Fi). Smart TV, autre tablette ou 2e ordinateur : ouvrez l'adresse affichée (…/?tv=CODE) ou scannez le QR code. Au lancement de la partie, l'appli demande où afficher l'écran (2e écran branché, cast, ou plus tard). 🔊 Quand un écran casté est relié, <b>le son du blind test sort de la TV</b> et la régie devient muette (réglage ⚙️ « Son du blind test » pour changer). 📽️ Vidéoprojecteur introuvable dans la liste ? Le bouton Caster ne voit que les Chromecast : pour un projecteur Miracast, sur Windows faites ⊞+K (connexion), ⊞+P → Étendre, puis 📺 Ouvrir l'écran TV ; pour AirPlay, Recopie de l'écran ; sinon câble HDMI.</p>
+    <ol class="steps">
+      <li>Quand tout le monde est inscrit : <span class="ui">Lancer la partie ▶</span>.</li>
+      <li>Lisez la question au micro. Les clients voient la question sur la TV et répondent sur leur téléphone (4 couleurs et formes).</li>
+      <li>À la fin du chrono (ou plus tôt) : <span class="ui">Dévoiler ▶</span>. Lisez la bonne réponse et l'anecdote 💡 s'il y en a une. La régie affiche le <b>temps de réponse de chaque joueur</b> (⚡ = le plus rapide, ✓/✗ et points gagnés).</li>
+      <li>⏭ Les questions <b>défilent toutes seules</b> : 5 secondes après chaque réponse dévoilée, la suivante arrive. Besoin de parler au micro ? <span class="ui">⏸ Pause</span> (régie, télécommande, ou touche P) arrête le défilement ; <span class="ui">▶ Reprendre le défilement</span> repart. Les boutons restent utilisables pour avancer à la main.</li>
+      <li>🔔 <b>Bruitages</b> : tic-tac sur les 5 dernières secondes, gong à la fin du temps, « boing » quand un seul joueur s'est trompé, trombone quand personne n'a trouvé, ⚡ éclair pour le joueur le plus rapide puis roulement de tambour au classement, acclamations au podium. Ils sortent au même endroit que le blind test (régie ou écran casté), jamais par-dessus un extrait. Boutons <span class="ui">🔔 Bruitages</span> et <span class="ui">🔊 Son</span> dans la régie pour couper ; volumes séparés (extraits / bruitages) dans ⚙️. Les téléphones vibrent : court = gagné, long = perdu.</li>
+      <li>📺 <b>Écran de jeu</b> : le temps restant s'affiche dans le <b>gros buzzer</b> au centre des réponses (l'anneau se vide, il devient rouge les 5 dernières secondes) ; en blind test, un <b>spectre audio</b> s'anime pendant l'extrait. À droite, le <b>classement en direct</b> : ✓ sur les joueurs qui ont déjà répondu, puis les points gagnés au dévoilement.</li>
+      <li>🏅 <b>Podium en direct</b> : pendant les questions, réponses et classements (quiz et blind test), le haut de la TV affiche au centre les 3 premiers de la partie avec 🥇🥈🥉 (dès qu'ils ont des points).</li>
+      <li><span class="ui">Question suivante ▶</span>. Le <b>classement s'affiche tout seul toutes les 5 questions</b> (bouton <span class="ui">Classement ▶</span> à ces moments-là). À la dernière question : la TV alterne en boucle le <b>podium</b> (15 s) et le <b>classement de la saison</b> (15 s, joueurs du soir signalés), jusqu'à <span class="ui">Nouvelle partie</span>.</li>
+      <li>📱 Côté joueurs : dès qu'ils rejoignent, le téléphone passe <b>en plein écran, en portrait</b> (plus de barre d'adresse). Sur iPhone, Safari ne le permet pas : la barre reste visible, sauf avec l'appli ajoutée à l'écran d'accueil. Dans la salle d'attente, le <b>logo TuL’asOuPas</b> s'affiche en haut à droite de l'écran joueur.</li>
+      <li>😅 Quand <b>un seul joueur</b> s'est trompé et que tous les autres ont trouvé, l'écran TV affiche son nom avec une petite vanne gentille pendant quelques secondes.</li>
+      <li>En fin de partie, dans la régie : <span class="ui">⏱️ Temps de réponse de toute la partie</span> = tableau joueur par joueur, question par question.</li>
+      <li>📱 Pendant toute la partie, un <b>petit QR code</b> reste affiché en bas à droite de la TV avec le code de la partie : un client qui a perdu la connexion (téléphone verrouillé, batterie, page fermée) le scanne et revient avec ses points.</li>
+    </ol>
+    <p>Raccourcis sur l'ordinateur : <kbd>Espace</kbd> ou <kbd>Entrée</kbd> (aucun bouton sélectionné) = étape suivante ; les flèches servent à passer de bouton en bouton. Double-clic sur l'écran = plein écran.</p>
+    <div class="two">
+      <div class="card"><h3>Points de la partie</h3><p>Bonne réponse : <b>500 à 1 000 points</b> selon la rapidité, plus <b>50 par bonne réponse d'affilée</b> (jusqu'à +150). Mauvaise réponse ou pas de réponse : 0.</p></div>
+      <div class="card"><h3>Gérer les joueurs</h3><ul><li>Pseudo déplacé : cliquez sur le pseudo dans la salle d'attente ou la régie → <b>Exclure</b>.</li><li>Téléphone coupé ou page rechargée : le joueur revient tout seul avec ses points (ou rescanne le petit QR code en bas à droite de la TV).</li><li>Ordinateur redémarré : Accueil → <span class="ui">♻️ Reprendre la partie</span> (pendant 6 h).</li></ul></div>
+    </div>
+    <div class="card"><h3>🎵 Questions blind test</h3><ul>
+      <li>Avant la partie, l'écran « Préparation du blind test » prépare les extraits Deezer et vérifie chaque extrait YouTube <b>et tous les bruitages</b> (« ✓ Bruitages : 7/7 prêts », sinon il indique le son manquant). L'extrait <b>se lance tout seul</b> et dure <b>exactement le temps de réponse</b> (réglage « Temps ») : le chrono démarre quand la musique démarre, la musique s'arrête quand le chrono s'arrête : rien à cliquer. Il est joué par <b>la régie</b> : le son sort de l'ordinateur de l'animateur, donc de ses enceintes ou de la sono qui y est branchée. En mode écran unique (tablette), il sort de la tablette.</li>
+      <li>🛟 <b>Lecture surveillée</b> : si YouTube met l'extrait en pause, s'arrête trop tôt, repart du début de la vidéo ou reste bloqué en chargement, l'appli relance, recale ou recharge l'extrait toute seule (puis passe au lien de secours). Si le son doit sortir de l'écran casté / de la fenêtre TV et que l'extrait n'y démarre pas en 9 s, ou qu'il y coupe en cours de route, <b>la régie le joue elle-même</b> (le temps restant). L'extrait suivant est mis en mémoire en silence pendant le dévoilement et le classement (une éventuelle pub YouTube passe à ce moment-là, sans le son) : il démarre instantanément. Jamais deux lectures en même temps.</li>
+      <li>🎶 <b>Deezer d'abord, YouTube en secours</b> : pour les chansons, l'extrait est joué par <b>Deezer</b> (extrait officiel de 30 s, gratuit, sans compte, aucune publicité) ; « 🎵 Extrait : Deezer » s'affiche dans le coin. Si Deezer n'a pas démarré au bout de <b>3 secondes</b> (chanson absente, extrait mort, Deezer injoignable), <b>YouTube prend la main</b>. Le premier des deux qui joue vraiment garde la main : l'autre est coupé, jamais deux musiques en même temps. Deezer ne joue que s'il a la bonne chanson du bon artiste : jamais un autre titre. Pas de Deezer pour les génériques d'émissions, musiques de films, Disney et jeux vidéo : ceux-là passent directement par YouTube.</li>
+      <li>🎧 <b>Catégories blind test</b> : années 60 à 2020, chanson française, pop &amp; rock, rap &amp; RnB, dance &amp; électro, rock &amp; métal, comédies musicales, cinéma &amp; séries, Disney, émissions TV, jeux vidéo, musique classique et <b>spéciales</b> (Noël, été, Eurovision : cochez seulement la sous-catégorie de la saison).</li>
+      <li><b>Le chrono démarre quand l'extrait commence vraiment</b> (pas pendant le chargement de la vidéo). En attendant, la TV affiche « 🎵 Ça arrive… » et les téléphones sont verrouillés, puis « 🎵 Écoutez… ».</li>
+      <li>Pas de son ? Vérifiez le volume et la sortie audio de l'ordinateur. Si le navigateur bloque le son (rare : cliquez une fois n'importe où dans la régie en début de soirée), un bouton <span class="ui">▶ Lancer l'extrait</span> apparaît. Si la vidéo ne démarre pas du tout, le chrono part quand même au bout de 15 s. <span class="ui">🔁 Rejouer l'extrait</span> est dans la régie et la télécommande.</li>
+      <li>Une fois la réponse dévoilée, la TV montre la vignette du clip. Les téléphones ne reçoivent jamais le lien YouTube (anti-triche).</li>
+      <li><b>Son seul</b> : la vidéo n'est jamais affichée, seul le son de l'extrait est joué par l'ordinateur (plus léger et plus fiable). Une note ♪ s'affiche à la place.</li>
+      <li><b>Préparation avant la partie</b> : en cliquant sur <span class="ui">Lancer la partie</span>, une barre de chargement vérifie chaque extrait du blind test. Un lien mort est remplacé par son lien de secours ; un extrait illisible est retiré de la partie. <span class="ui">Passer et lancer la partie</span> permet de démarrer sans attendre.</li>
+      <li>Pendant la partie, l'extrait suivant est préchargé en arrière-plan : il démarre presque tout de suite.</li>
+      <li>Conseil : temps de réponse d'au moins 20 s.</li></ul></div>
+    <p class="tip">Réglages utiles (⚙️) : nombre de questions, temps (10 à 60 s), enchaînement automatique (activé d'office), « Question seulement sur la TV (anti-triche) », compter ou non les points de saison.</p>
+    <div class="card"><h3>🎁 Lots à gagner</h3><ul>
+      <li>Dans les réglages (⚙️ ou télécommande), rubrique <b>🎁 Lots à gagner</b> : écrivez le lot du 1er, du 2e et du 3e (laissez vide s'il n'y en a pas).</li>
+      <li>Les lots s'affichent sur la TV pendant la salle d'attente (« À gagner ce soir »), puis <b>sous chaque marche du podium</b> à la fin. Les gagnants voient aussi « 🎁 Tu remportes… » sur leur téléphone.</li>
+      <li>Loi Évin : pas d'alcool en lot (ni « verre offert », ni bouteille). Préférez un soft, un cocktail sans alcool, une planche, un café gourmand, un goodies…</li></ul></div>
+    <div class="card"><h3>🔁 Questions différentes à chaque partie</h3><p>L'appli retient les questions déjà posées sur cet ordinateur : à la partie suivante, elle pioche d'abord dans celles <b>jamais posées</b>, et ne ressort les anciennes (les plus anciennes d'abord) que quand tout le thème a été joué. Un quiz réglé « dans l'ordre » (sans ordre aléatoire) est rejoué tel quel.</p></div>
+  </section>
+
+  <section id="quiz">
+    <h2><span class="n">5</span>Préparer un quiz</h2>
+    <p>Accueil → <span class="ui">🛠️ Créer / modifier mes quiz</span>. Trois façons de faire :</p>
+    <table>
+      <tr><th>Façon</th><th>Comment</th></tr>
+      <tr><td>⚡ Quiz express</td><td>Cocher des thèmes (ou un bouton « Années 80 »…), choisir le nombre de questions, <b>Créer le quiz</b>. 🔄 remplace une question, 🗑 la retire. Prêt en 10 secondes.</td></tr>
+      <tr><td>✍️ Écrire mes questions</td><td>Question, bonne réponse, 1 à 3 mauvaises (ou Vrai / Faux), puis <b>Ajouter et continuer</b>. Idéal pour des questions sur le bar ou le quartier.</td></tr>
+      <tr><td>📥 Importer un fichier</td><td>Modèle Excel (CSV point-virgule) ou fichier OpenQuizzDB (JSON).</td></tr>
+      <tr><td>🎵 Blind test</td><td>Dans une question, collez un <b>lien YouTube</b> (« Extrait YouTube »), réglez le début (ex. 1:05) ; la durée jouée suit le temps de réponse de la partie. 🎵 <b>Le plus rapide pour un blind test</b> : Mes quiz → <span class="ui">🎵 Blind test YouTube</span> (ou, dans un quiz, <span class="ui">🎵 Ajouter une musique</span>) : collez le lien YouTube, l'appli reconnaît le titre, choisissez la question (titre, film, série, dessin animé, jeu vidéo, artiste) et laissez les mauvaises réponses vides : elles sont choisies automatiquement. 🖼️ <b>Image</b> (tableau, photo) : collez le lien de l'image ou de la page « Fichier: » sur Wikipédia ; elle s'affiche en grand sur la TV (Excel : lien en 9e colonne). Thème intégré <b>Tableaux célèbres</b> : « Quel est ce tableau ? » / « Qui l'a peint ? ». Excel : lien en 7e colonne, début en 8e.</td></tr>
+    </table>
+    <p>Ensuite : <b>▶ Jouer ce quiz</b> sur la carte du quiz, ou choisissez-le dans ⚙️ Réglages → Quiz. La banque compte <b>2 367 questions</b> : 10 catégories avec sous-catégories, et 6 <b>Soirées décennies</b> (Années 70 à 2020).</p>
+    <p class="tip">Les quiz sont sauvegardés en ligne et se retrouvent sur tous les appareils du bar une fois le jeton GitHub connecté (voir « Responsable »).</p>
+  </section>
+
+  <section id="saison">
+    <h2><span class="n">6</span>Classement de la saison</h2>
+    <p>Chaque partie ajoute des points au classement de l'année, calculés automatiquement :</p>
+    <div class="pts"><span>1er<b>25</b></span><span>2e<b>18</b></span><span>3e<b>15</b></span><span>4e<b>12</b></span><span>5e<b>10</b></span><span>6e<b>8</b></span><span>7e<b>6</b></span><span>8e<b>4</b></span><span>9e<b>2</b></span><span>10e<b>1</b></span><span>Participation<b>+5</b></span><span>Sans faute (5 questions min.)<b>+10</b></span><span>Série de 5<b>+5</b></span><span>Abandon<b>−5</b></span></div>
+    <ul>
+      <li><span class="ui">± Bonus / malus</span> : ajouter ou retirer des points à un joueur, avec un motif.</li>
+      <li><span class="ui">📺 Afficher à l'écran</span> : le classement de la saison passe sur la TV.</li>
+      <li>Pendant la préparation de la partie (salle d'attente), la TV affiche aussi automatiquement le <b>top 8 de la saison</b> ; les joueurs déjà connectés ce soir ont un badge « ce soir ».</li>
+      <li><span class="ui">Barème</span> : modifier les points ci-dessus. <span class="ui">Nouvelle saison</span> : tout repart à 0, l'ancienne est archivée.</li>
+      <li>Client qui change de téléphone : il retrouve ses points avec son <b>code joueur</b> (page « Classement de la saison » → « J'ai déjà un code joueur »).</li>
+    </ul>
+  </section>
+
+  <section id="evin">
+    <h2><span class="n">7</span>Alcool et loi Évin</h2>
+    <ul>
+      <li><b>Lots</b> : jamais de boisson alcoolisée, et aucun point lié à un achat. La participation est gratuite.</li>
+      <li><b>Mineurs</b> : ils peuvent jouer, mais ne reçoivent jamais d'alcool.</li>
+      <li><b>Thèmes alcool</b> (Vins, Bières & spiritueux, Cocktails) : décochés par défaut, à cocher seulement devant un public majeur. Le message sanitaire s'affiche alors tout seul sous ces questions.</li>
+      <li><b>Au micro</b> : rester factuel (origine, fabrication). Pas d'incitation à boire, pas de jeux d'alcool, pas de « tournée » en récompense.</li>
+    </ul>
+    <p class="warn">En cas de doute sur un lot ou une animation, demandez au responsable avant la soirée.</p>
+  </section>
+
+  <section id="depannage">
+    <h2><span class="n">8</span>Dépannage</h2>
+    <table>
+      <tr><th>Problème</th><th>Solution</th></tr>
+      <tr><td>Un client n'arrive pas à rejoindre</td><td>Vérifier qu'il est sur le Wi-Fi ou en 4G et qu'il tape le bon code. Recharger sa page. Il doit cocher les conditions d'utilisation.</td></tr>
+      <tr><td>« Page ouverte en local » sur la TV</td><td>Le site est ouvert depuis un fichier : ouvrir l'adresse en github.io.</td></tr>
+      <tr><td>La fenêtre écran TV ne s'ouvre pas</td><td>Autoriser les fenêtres pop-up pour le site, puis <span class="ui">📺 Ouvrir l'écran TV</span>.</td></tr>
+      <tr><td>Smart TV (Samsung, LG…) : page blanche ou affichage cassé</td><td>Ouvrez l'adresse du site suivie de <b>?diag</b> (ex. <code>…/Quizz/?diag</code>) dans le navigateur de la TV : la page indique si la TV peut faire tourner le quiz. Si « Connexion téléphones (WebRTC) » est sur ❌, la TV ne peut pas héberger la partie : branchez un Chromecast, une clé Fire TV / Android TV ou un PC avec Chrome. Un cadre rouge en bas de l'écran = erreur : prenez-le en photo pour le support.</td></tr>
+      <tr><td>Pas de plein écran</td><td>Cliquer dans la fenêtre TV ou double-cliquer. iPhone / iPad : installer l'appli (section 3).</td></tr>
+      <tr><td>Réseau coupé en pleine partie</td><td>Les téléphones se reconnectent seuls. Si l'ordinateur a redémarré : Accueil → <span class="ui">♻️ Reprendre la partie</span>.</td></tr>
+      <tr><td>Musique qui coupe ou ne démarre pas</td><td>L'appli relance d'elle-même ; si ça persiste, vérifier la connexion internet de l'appareil qui joue le son (Wi-Fi faible, partage de connexion). Avec un écran casté peu puissant, mettre ⚙️ « Son du blind test » sur <b>Régie</b>.</td></tr>
+      <tr><td>Pas de son sur un blind test</td><td>Le son sort de la régie : vérifier le volume de l'ordinateur et sa sortie audio (enceintes / sono). Bouton <span class="ui">▶ Lancer l'extrait</span> dans la régie si affiché.</td></tr>
+      <tr><td>Mauvaise réponse dans une question</td><td>La décision de l'animateur est définitive : annoncer l'erreur, passer, puis corriger la question dans Mes quiz après la soirée.</td></tr>
+      <tr><td>« Jeton GitHub expiré »</td><td>Rien n'est perdu. Prévenir le responsable, qui collera un nouveau jeton.</td></tr>
+      <tr><td>Une nouvelle version ne s'affiche pas</td><td>Recharger en forçant : <kbd>Ctrl</kbd> + <kbd>F5</kbd> (ou vider le cache du navigateur).</td></tr>
+    </table>
+    <p>Pour tester sans clients : <a href="simulateur.html">simulateur</a> (téléphones virtuels) et <a href="test.html">page de test</a> (connexion, relais réseau).</p>
+  </section>
+
+  <section id="resp">
+    <h2><span class="n">9</span>Réservé au responsable</h2>
+    <ul>
+      <li><b>Sauvegarde en ligne</b> (une fois par appareil admin) : Mes quiz → <b>Connecter</b> → jeton GitHub « Contents : Read and write », <b>Expiration : No expiration</b>. Le jeton reste sur l'appareil : ne pas le partager.</li>
+      <li><b>Mise à jour du site</b> : envoyer les nouveaux fichiers sur GitHub en gardant <code>config.js</code>, puis recharger en forçant.</li>
+      <li><b>Coordonnées de l'organisateur</b> (conditions d'utilisation) : fichier <code>config.js</code>, rubrique ORGANISATEUR.</li>
+      <li><b>PIN de la télécommande</b> : visible dans ⚙️ Réglages. Ne pas le donner aux clients.</li>
+    </ul>
+  </section>
+
+  <p class="legal">L'abus d'alcool est dangereux pour la santé, à consommer avec modération.<br><a href="conditions.html">Conditions d'utilisation</a></p>
+</main>
+<script>
+// cases cochées mémorisées sur cet appareil (confort uniquement)
+const boxes=[...document.querySelectorAll('#checklist input')], KEY='qb_staff_check';
+try{ const v=JSON.parse(localStorage.getItem(KEY)||'[]'); boxes.forEach((b,i)=>b.checked=!!v[i]); }catch(e){}
+const save=()=>{ try{ localStorage.setItem(KEY, JSON.stringify(boxes.map(b=>b.checked))); }catch(e){} };
+boxes.forEach(b=>b.onchange=save);
+document.getElementById('reset').onclick=()=>{ boxes.forEach(b=>b.checked=false); save(); };
+</script>
+</body>
+</html>
