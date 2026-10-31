@@ -129,7 +129,7 @@ code{background:rgba(255,255,255,.07);color:#22d3ee;border-radius:5px;padding:0 
     <div class="row"><h2><span class="n">2</span>Avant la soirée</h2><button class="btn ghost no-print" id="reset" type="button">Tout décocher</button></div>
     <ul class="check" id="checklist">
       <li><label><input type="checkbox"><span>Ordinateur du bar branché à la TV ou au vidéoprojecteur en <b>écran étendu</b> (Windows <kbd>⊞</kbd> + <kbd>P</kbd> → Étendre).</span></label></li>
-      <li><label><input type="checkbox"><span>Le site est ouvert sur l'ordinateur (adresse en <b>github.io</b>, pas un fichier local).</span></label></li>
+      <li><label><input type="checkbox"><span>Le site est ouvert sur l'ordinateur (adresse <b>https://n3wtonson.github.io/tulasoupas/</b>, pas un fichier local).</span></label></li>
       <li><label><input type="checkbox"><span>Wi-Fi du bar en marche ; le code Wi-Fi est affiché pour les clients.</span></label></li>
       <li><label><input type="checkbox"><span>Quiz choisi : banque de questions, Quiz express ou quiz préparé (voir « Préparer un quiz »).</span></label></li>
       <li><label><input type="checkbox"><span>Micro prêt : c'est l'animateur qui lit les questions, l'appli n'a pas de voix.</span></label></li>
@@ -165,13 +165,24 @@ code{background:rgba(255,255,255,.07);color:#22d3ee;border-radius:5px;padding:0 
     <div class="card">
       <h3>C · Libre-service : sans animateur 🤖</h3>
       <ol class="steps">
-        <li>Sur l'ordinateur, la tablette ou la Smart TV branché(e) à l'écran : Accueil → <span class="ui">🤖 Libre-service (sans animateur)</span>. Astuce : mettez en favori l'adresse du site suivie de <b>?libre</b> (ex. <code>…/Quizz/?libre</code>) : la TV démarre directement en libre-service et <b>reprend la partie en cours</b> après un redémarrage.</li>
+        <li>Sur l'ordinateur, la tablette ou la Smart TV branché(e) à l'écran : Accueil → <span class="ui">🤖 Libre-service (sans animateur)</span>. Astuce : mettez en favori l'adresse du site suivie de <b>?libre</b> (ex. <code>https://n3wtonson.github.io/tulasoupas/?libre</code>) : la TV démarre directement en libre-service et <b>reprend la partie en cours</b> après un redémarrage.</li>
         <li>Appuyez <b>une fois</b> sur OK (ou cliquez) dans la page : sans ce geste, le navigateur bloque le son du blind test. Si le bouton « 🔊 autoriser le son » s'affiche, il est déjà sélectionné : OK suffit.</li>
         <li>Les clients scannent le QR code et appuient sur <b>✋ Je suis prêt</b> sur leur téléphone. La TV affiche « Joueurs prêts : 2 / 3 ». <b>Quand tous les joueurs connectés sont prêts</b> (2 joueurs minimum par défaut), la partie démarre 5 s plus tard. Un joueur peut annuler son « prêt » tant que la partie n'a pas commencé. <b>Joueur inactif</b> : dès qu'un joueur est prêt, ceux qui ne le sont pas ont <b>1 min</b> pour appuyer (avertissement ⏳ sur leur téléphone, qui vibre, et sur la TV). Passé ce délai, ils sont <b>retirés</b> de la salle d'attente et la partie peut partir ; ils peuvent revenir d'un appui sur « Rejoindre la partie ».</li>
         <li>Les questions s'enchaînent toutes seules. À la fin : podium et classement de la saison, puis <b>retour automatique</b> en salle d'attente : chacun réappuie sur ✋ Je suis prêt pour la partie suivante.</li>
         <li>Par défaut, les parties <b>alternent quiz et blind test</b> (toutes catégories, questions jamais vues en priorité). Plus aucun joueur connecté pendant 1 min : retour en salle d'attente.</li>
       </ol>
       <p class="tip">Réglages ⚙️ (ou télécommande) → rubrique <b>🤖 Libre-service</b> : nombre de joueurs minimum, <b>questions par quiz</b> (15 par défaut), <b>extraits par blind test</b> (10 par défaut), type de parties (alternance, quiz, blind test ou votre quiz), durée de l'écran de fin. Le staff peut toujours lancer, mettre en pause ou arrêter depuis la télécommande.</p>
+    </div>
+    <div class="card">
+      <h3>D · Vidéoprojecteur Xiaomi (appli Android) 📽️</h3>
+      <ol class="steps">
+        <li>Installez une fois l'appli <b>TuL’asOuPas</b> (fichier <code>tulasoupas-tv.apk</code>, voir ci-dessous).</li>
+        <li>Allumez le projecteur, ouvrez l'appli : l'écran <b>« À quoi on joue ? »</b> s'affiche. Choisissez <b>Quiz</b>, <b>Blind test</b> ou <b>Les deux</b> (questions et musiques mélangées dans la même partie) avec les flèches, puis <b>OK</b>.</li>
+        <li>Puis : <b>⚡ Partie rapide</b> (thèmes au hasard, 15 questions ou 10 extraits, 20 s) ou <b>🎛️ Personnaliser</b> : cochez les thèmes (le nombre de questions disponibles s'affiche), choisissez le nombre de questions (5 à 30) et le temps de réponse (10 à 60 s), puis <b>Ouvrir la salle d'attente</b>. Vos choix sont gardés pour la fois suivante.</li>
+        <li>La salle d'attente apparaît avec le <b>QR code</b> : la partie se lance en libre-service quand tous les joueurs ont appuyé sur ✋ Je suis prêt. Le son marche directement, sans clic.</li>
+        <li><b>Retour</b> sur la télécommande : ferme les réglages, revient au choix du jeu ; pendant une partie, appuyer <b>deux fois</b> (la partie est sauvegardée et peut être reprise). Sur l'écran de choix, Retour quitte l'appli.</li>
+      </ol>
+      <p class="tip"><b>Installer l'APK</b> : copiez <code>tulasoupas-tv.apk</code> sur une clé USB, branchez-la au projecteur, ouvrez-la avec le gestionnaire de fichiers et acceptez l'installation (autoriser les « sources inconnues » si le projecteur le demande). L'appli ouvre le site en ligne : une mise à jour sur GitHub Pages arrive sur le projecteur sans réinstaller. Sans projecteur : <code>https://n3wtonson.github.io/tulasoupas/?projo</code> dans n'importe quel navigateur affiche le même écran.</p>
     </div>
     <div class="card">
       <h3>📺 Télécommande de la TV</h3>
@@ -271,7 +282,7 @@ code{background:rgba(255,255,255,.07);color:#22d3ee;border-radius:5px;padding:0 
       <tr><td>Un client n'arrive pas à rejoindre</td><td>Vérifier qu'il est sur le Wi-Fi ou en 4G et qu'il tape le bon code. Recharger sa page. Il doit cocher les conditions d'utilisation.</td></tr>
       <tr><td>« Page ouverte en local » sur la TV</td><td>Le site est ouvert depuis un fichier : ouvrir l'adresse en github.io.</td></tr>
       <tr><td>La fenêtre écran TV ne s'ouvre pas</td><td>Autoriser les fenêtres pop-up pour le site, puis <span class="ui">📺 Ouvrir l'écran TV</span>.</td></tr>
-      <tr><td>Smart TV (Samsung, LG…) : page blanche ou affichage cassé</td><td>Ouvrez l'adresse du site suivie de <b>?diag</b> (ex. <code>…/Quizz/?diag</code>) dans le navigateur de la TV : la page indique si la TV peut faire tourner le quiz. Si « Connexion téléphones (WebRTC) » est sur ❌, la TV ne peut pas héberger la partie : branchez un Chromecast, une clé Fire TV / Android TV ou un PC avec Chrome. Un cadre rouge en bas de l'écran = erreur : prenez-le en photo pour le support.</td></tr>
+      <tr><td>Smart TV (Samsung, LG…) : page blanche ou affichage cassé</td><td>Ouvrez l'adresse du site suivie de <b>?diag</b> (ex. <code>https://n3wtonson.github.io/tulasoupas/?diag</code>) dans le navigateur de la TV : la page indique si la TV peut faire tourner le quiz. Si « Connexion téléphones (WebRTC) » est sur ❌, la TV ne peut pas héberger la partie : branchez un Chromecast, une clé Fire TV / Android TV ou un PC avec Chrome. Un cadre rouge en bas de l'écran = erreur : prenez-le en photo pour le support.</td></tr>
       <tr><td>Pas de plein écran</td><td>Cliquer dans la fenêtre TV ou double-cliquer. iPhone / iPad : installer l'appli (section 3).</td></tr>
       <tr><td>Réseau coupé en pleine partie</td><td>Les téléphones se reconnectent seuls. Si l'ordinateur a redémarré : Accueil → <span class="ui">♻️ Reprendre la partie</span>.</td></tr>
       <tr><td>Musique qui coupe ou ne démarre pas</td><td>L'appli relance d'elle-même ; si ça persiste, vérifier la connexion internet de l'appareil qui joue le son (Wi-Fi faible, partage de connexion). Avec un écran casté peu puissant, mettre ⚙️ « Son du blind test » sur <b>Régie</b>.</td></tr>

@@ -23,7 +23,7 @@ Le dossier `data/` est créé automatiquement dans le dépôt par la sauvegarde 
 ## Mise en ligne
 1. github.com → **New repository** `quiz-bar` (Public).
 2. **Add file → Upload files** → déposer tous les fichiers → **Commit changes**.
-3. **Settings → Pages** → Branch `main` / `(root)` → **Save**. Adresse : `https://VOTRE-PSEUDO.github.io/quiz-bar/`.
+3. **Settings → Pages** → Branch `main` / `(root)` → **Save**. Adresse : `https://n3wtonson.github.io/tulasoupas/`.
 4. `config.js` → crayon ✏️ → remplir `ORGANISATEUR` → **Commit**.
 5. Sauvegarde en ligne (une fois par appareil admin) : Mes quiz → **Connecter** → suivre les 4 étapes (jeton GitHub « Contents : Read and write » limité au dépôt).
 

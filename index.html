@@ -1163,6 +1163,58 @@ svg.avi .cf{fill:currentColor;stroke:none}
 .colb{box-shadow:0 0 10px -2px currentColor;border:2px solid rgba(13,15,23,.9)}
 .colb.on{border-color:#fff!important;box-shadow:0 0 0 2px var(--bg),0 0 0 4px #fff,0 0 18px rgba(255,255,255,.5)!important}
 .zap .av,.roast .av{box-shadow:0 0 0 3px var(--pc),0 0 26px var(--pc)!important}
+
+/* =====================================================================
+   VIDÉOPROJECTEUR : page de choix Quiz / Blind test
+   ===================================================================== */
+.pj{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3.2vh;padding:4vh 5vw;text-align:center;font-size:2.8vh;font-size:clamp(14px,min(1.6vw,2.8vh),40px)}
+.pj-logo{width:44vh;width:min(30vw,44vh);height:auto;animation:logoGlow 4s ease-in-out infinite}
+.pj-h{font-family:var(--f-disp);font-weight:400;font-size:2.4em;letter-spacing:.03em;background:linear-gradient(90deg,var(--cyan-l),var(--violet-l) 50%,var(--pink-l));-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 18px rgba(139,92,246,.5))}
+.pj-choices{display:grid;grid-template-columns:1fr 1fr;gap:3vw;width:1300px;width:min(92vw,1300px)}
+.pj-btn{--cc:#8b5cf6;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.2vh;padding:5vh 2vw;border-radius:30px;color:#fff;cursor:pointer;
+  background:radial-gradient(circle at 50% 0%,rgba(255,255,255,.12),transparent 60%),linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.01));
+  border:3px solid var(--cc);box-shadow:0 0 30px -8px var(--cc),inset 0 0 50px -20px var(--cc);transition:transform .18s,box-shadow .2s,background .2s}
+.pj-quiz{--cc:#22d3ee}.pj-bt{--cc:#ec4899}
+.pj-btn .pj-ic{font-size:4.2em;line-height:1;filter:drop-shadow(0 0 18px var(--cc))}
+.pj-btn b{font-family:var(--f-disp);font-weight:400;font-size:2.6em;letter-spacing:.04em;text-shadow:0 0 18px var(--cc)}
+.pj-btn small{font-size:1.05em;color:var(--muted);font-weight:600}
+.pj-btn:hover,.pj-btn:focus{outline:none!important;transform:scale(1.05);box-shadow:0 0 0 4px rgba(255,255,255,.85),0 0 70px var(--cc),inset 0 0 70px -16px var(--cc)!important;
+  background:radial-gradient(circle at 50% 0%,rgba(255,255,255,.18),transparent 60%),linear-gradient(180deg,rgba(255,255,255,.1),rgba(255,255,255,.02))}
+.pj-res{font-size:1.1em}
+.pj-hint{color:var(--muted);font-size:1em}.pj-hint b{color:#fff}
+.pj-evin{font-size:.75em!important}
+@media (max-aspect-ratio:1/1){ .pj-choices{grid-template-columns:1fr} }
+/* vidéoprojecteur : 3 choix, partie rapide / personnalisée */
+.pj-choices.n3{grid-template-columns:repeat(3,1fr);gap:2.2vw}
+.pj-choices.n3 .pj-btn b{font-size:2.2em}
+.pj-mix{--cc:#a78bfa}.pj-fast{--cc:#22d3ee}.pj-perso{--cc:#ec4899}
+.pj-logo.sm{width:26vh;width:min(20vw,26vh)}.pj-logo.xs{width:12vh;width:min(9vw,12vh)}
+.pj-perso-pg{justify-content:flex-start;gap:2vh;padding-top:3vh;font-size:1.12vw;font-size:clamp(12px,min(1.12vw,2.05vh),30px)}
+.pj-top{display:flex;align-items:center;gap:1.6vw}
+.pj-top .pj-h{font-size:2em}
+.pj-box{width:1560px;width:min(94vw,1560px);display:flex;flex-direction:column;gap:2vh;padding:2.4vh 2vw;border-radius:24px;text-align:left;
+  background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.015));border:1px solid var(--line2);box-shadow:inset 0 0 50px -25px rgba(139,92,246,.6)}
+.pj-box h2{font-size:1.1em;color:var(--cyan-l);letter-spacing:.12em;text-shadow:0 0 12px rgba(6,182,212,.5)}
+.pj-row{display:flex;align-items:center;gap:1vw}
+.pj-count{margin-left:auto;color:var(--muted);font-weight:700;font-family:var(--f-num);font-size:.95em}
+.pj-mini{padding:.35em 1.1em;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--text);font-weight:700;font-size:.9em;cursor:pointer}
+.pj-grp h3{font-size:.95em;color:var(--muted);margin:.2vh 0 .9vh;letter-spacing:.1em}
+.pj-cats{display:flex;flex-wrap:wrap;gap:.65em}
+.pj-cat{--cc:#22d3ee;display:inline-flex;align-items:center;gap:.5em;padding:.55em 1em;border-radius:14px;border:2px solid var(--line);background:rgba(255,255,255,.03);color:var(--muted);font-weight:700;font-size:1em;cursor:pointer;transition:background .15s,border-color .15s,box-shadow .2s}
+.pj-cat.bt{--cc:#ec4899}
+.pj-cat small{font-family:var(--f-num);font-size:.68em;opacity:.65}
+.pj-cat.on{color:#fff;border-color:var(--cc);background:color-mix(in srgb,var(--cc) 16%,transparent);box-shadow:0 0 16px -5px var(--cc)}
+.pj-cat.on::before{content:"✓";color:var(--cc);font-weight:900;text-shadow:0 0 8px var(--cc)}
+.pj-row2{display:grid;grid-template-columns:1fr 1fr;gap:2.4vw}
+.pj-seg{display:flex;flex-wrap:wrap;gap:.55em;margin-top:1vh}
+.pj-seg button{min-width:3.6em;padding:.55em .9em;border-radius:12px;border:2px solid var(--line);background:rgba(255,255,255,.03);color:var(--muted);font-family:var(--f-num);font-weight:800;font-size:1.05em;cursor:pointer}
+.pj-seg button.on{border-color:var(--violet);background:linear-gradient(135deg,rgba(139,92,246,.4),rgba(236,72,153,.32));color:#fff;box-shadow:0 0 18px -4px var(--violet)}
+.pj-go{font-size:1.35em;padding:.8em 2.4em}
+.pj-go:disabled{opacity:.35}
+html.kbnav .pj-cat:focus,html.kbnav .pj-seg button:focus,html.kbnav .pj-mini:focus{outline:4px solid #fff!important;outline-offset:3px;box-shadow:0 0 22px var(--cc,#8b5cf6)!important}
+@media (max-aspect-ratio:1/1){ .pj-choices.n3{grid-template-columns:1fr} .pj-row2{grid-template-columns:1fr} }
+.pj-hi{display:inline-block;-webkit-text-fill-color:initial;color:#fff;background:none;filter:drop-shadow(0 0 14px rgba(139,92,246,.6))}
+.pj-perso-pg.mix{font-size:.98vw;font-size:clamp(11px,min(.98vw,1.78vh),26px);gap:1.4vh;padding-top:2vh}.pj-perso-pg.mix .pj-box{gap:1.3vh;padding:1.8vh 2vw}.pj-perso-pg.mix .pj-cats{gap:.5em}
 </style>
 </head>
 <body>
@@ -1423,7 +1475,9 @@ function makePeer(id) {
 /* Plein écran automatique de l'écran TV */
 /* iPhone : Safari n'autorise pas le plein écran d'une page ; l'appli ajoutée à l'écran d'accueil s'ouvre sans barres */
 var IS_IOS = /iP(hone|od|ad)/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-var APP_MODE = (window.matchMedia && matchMedia("(display-mode: fullscreen), (display-mode: standalone)").matches) || navigator.standalone === true;
+/* appli Android du vidéoprojecteur (WebView plein écran, son autorisé sans clic) */
+var TV_APP = /TuLasOuPasTV\//.test(navigator.userAgent || "");
+var APP_MODE = TV_APP || (window.matchMedia && matchMedia("(display-mode: fullscreen), (display-mode: standalone)").matches) || navigator.standalone === true;
 var CAN_FS = !!(document.documentElement.requestFullscreen || document.documentElement.webkitRequestFullscreen);
 if (APP_MODE)
     document.documentElement.classList.add("app-mode");
@@ -1922,7 +1976,8 @@ function playerState(p) {
    raccourci si tout le monde est « prêt »), quiz et blind test en alternance, retour automatique en salle d'attente. */
 var LGO_MS = 5000, LIDLE_MS = 60000; // départ 5 s après « tous prêts » ; joueur pas prêt retiré au bout d'1 min
 var idleLeft = function (p) { return H.libre && H.phase === "lobby" && !H.lgo && p.idleAt && p.connected && !p.ready ? Math.max(0, p.idleAt + LIDLE_MS - Date.now()) : null; };
-var LKIND = { quiz: "🧠 Quiz", bt: "🎵 Blind test", set: "🎲 Partie" };
+var LKIND = { quiz: "🧠 Quiz", bt: "🎵 Blind test", mix: "🔀 Quiz + Blind test", set: "🎲 Partie" };
+var lkLabel = function (k) { return k === "set" && LKIND[H.settings.pjk] ? LKIND[H.settings.pjk] + " (perso)" : (LKIND[k] || LKIND.set); };
 var effKind = function () { return !H.libre ? "set" : ((H.phase === "lobby" && !H.lgo ? H.lnext : H.lkind) || H.lnext || "set"); };
 var curQuiz = function () { return effKind() === "set" && H.settings.quiz !== "builtin" ? QZ.get(H.settings.quiz) : null; };
 var curThemes = function () {
@@ -1931,16 +1986,18 @@ var curThemes = function () {
         return ALL_THEMES().filter(function (t) { return isBlindTheme(t) && !ALC_THEMES.includes(t); });
     if (k === "quiz")
         return themesOf({ cats: Object.keys(CATS) });
+    if (k === "mix")
+        return themesOf({ cats: Object.keys(CATS) }).concat(ALL_THEMES().filter(function (t) { return isBlindTheme(t) && !ALC_THEMES.includes(t); }));
     return themesOf(H.settings);
 };
-var curN = function () { var k = effKind(); return k === "quiz" ? (H.settings.lnq || 15) : k === "bt" ? (H.settings.lnb || 10) : H.settings.n; };
+var curN = function () { var k = effKind(); return k === "quiz" || k === "mix" ? (H.settings.lnq || 15) : k === "bt" ? (H.settings.lnb || 10) : H.settings.n; };
 function libreInit() { var m = H.settings.lmix || "alt"; if (m !== "alt")
     H.lnext = m;
 else if (H.lnext !== "quiz" && H.lnext !== "bt")
     H.lnext = "quiz"; }
 function libreInfo() {
     var n = connectedCount(), min = H.settings.lmin || 2;
-    return { cd: H.lcd ? Math.max(0, H.lcd - Date.now()) : null, need: Math.max(0, min - n), n: n, next: LKIND[H.lnext] || LKIND.set, go: !!H.lgo,
+    return { cd: H.lcd ? Math.max(0, H.lcd - Date.now()) : null, need: Math.max(0, min - n), n: n, next: lkLabel(H.lnext), go: !!H.lgo,
         ready: __spreadArray([], __read(H.players.values()), false).filter(function (p) { return p.connected && p.ready; }).length };
 }
 /* salle d'attente : lance / annule / raccourcit le compte à rebours */
@@ -2533,7 +2590,7 @@ function ytBox() {
 /* écran sans clic (fenêtre TV, écran distant) : le navigateur bloque le son tant qu'on n'a pas cliqué une fois dans la page */
 function sndUnlock(T) {
     var b = $("#sndunlock");
-    var need = T && T.ytHere !== false && T.phase === "lobby" && navigator.userActivation && !navigator.userActivation.hasBeenActive && !(navigator.presentation && navigator.presentation.receiver);
+    var need = !TV_APP && T && T.ytHere !== false && T.phase === "lobby" && navigator.userActivation && !navigator.userActivation.hasBeenActive && !(navigator.presentation && navigator.presentation.receiver);
     if (!need) {
         if (b)
             b.remove();
@@ -5688,7 +5745,7 @@ function seasonAdmin(d) {
 }
 /* ===================== RÉGLAGES (partagés TV / télécommande) ===================== */
 function settingsHTML(s, quizzes, nb, libre) {
-    return "<div class=\"sform\">\n    ".concat(libre ? "<fieldset class=\"prizes lset\"><legend>\uD83E\uDD16 Libre-service (sans animateur)</legend>\n      <div class=\"srow\">\n        <label>Joueurs pour lancer<select data-k=\"lmin\">".concat([1, 2, 3, 4, 5, 6].map(function (v) { return "<option value=\"".concat(v, "\" ").concat(v === (s.lmin || 2) ? 'selected' : '', ">").concat(v, "</option>"); }).join(""), "</select></label>\n        <label>\u00C9cran de fin<select data-k=\"lend\">").concat([30, 60, 90, 120].map(function (v) { return "<option value=\"".concat(v, "\" ").concat(v === (s.lend || 60) ? 'selected' : '', ">").concat(v, " s</option>"); }).join(""), "</select></label>\n      </div>\n      <div class=\"srow\">\n        <label>Questions par quiz<select data-k=\"lnq\">").concat([5, 10, 15, 20, 25, 30].map(function (v) { return "<option value=\"".concat(v, "\" ").concat(v === (s.lnq || 15) ? 'selected' : '', ">").concat(v, "</option>"); }).join(""), "</select></label>\n        <label>Extraits par blind test<select data-k=\"lnb\">").concat([5, 10, 15, 20, 25, 30].map(function (v) { return "<option value=\"".concat(v, "\" ").concat(v === (s.lnb || 10) ? 'selected' : '', ">").concat(v, "</option>"); }).join(""), "</select></label>\n      </div>\n      <div class=\"srow\">\n        <label>Parties<select data-k=\"lmix\">").concat([["alt", "Quiz et blind test en alternance"], ["quiz", "Quiz uniquement"], ["bt", "Blind test uniquement"], ["set", "Selon le quiz et les thèmes ci-dessous"]].map(function (_a) {
+    return "<div class=\"sform\">\n    ".concat(libre ? "<fieldset class=\"prizes lset\"><legend>\uD83E\uDD16 Libre-service (sans animateur)</legend>\n      <div class=\"srow\">\n        <label>Joueurs pour lancer<select data-k=\"lmin\">".concat([1, 2, 3, 4, 5, 6].map(function (v) { return "<option value=\"".concat(v, "\" ").concat(v === (s.lmin || 2) ? 'selected' : '', ">").concat(v, "</option>"); }).join(""), "</select></label>\n        <label>\u00C9cran de fin<select data-k=\"lend\">").concat([30, 60, 90, 120].map(function (v) { return "<option value=\"".concat(v, "\" ").concat(v === (s.lend || 60) ? 'selected' : '', ">").concat(v, " s</option>"); }).join(""), "</select></label>\n      </div>\n      <div class=\"srow\">\n        <label>Questions par quiz<select data-k=\"lnq\">").concat([5, 10, 15, 20, 25, 30].map(function (v) { return "<option value=\"".concat(v, "\" ").concat(v === (s.lnq || 15) ? 'selected' : '', ">").concat(v, "</option>"); }).join(""), "</select></label>\n        <label>Extraits par blind test<select data-k=\"lnb\">").concat([5, 10, 15, 20, 25, 30].map(function (v) { return "<option value=\"".concat(v, "\" ").concat(v === (s.lnb || 10) ? 'selected' : '', ">").concat(v, "</option>"); }).join(""), "</select></label>\n      </div>\n      <div class=\"srow\">\n        <label>Parties<select data-k=\"lmix\">").concat([["alt", "Quiz et blind test en alternance"], ["quiz", "Quiz uniquement"], ["bt", "Blind test uniquement"], ["mix", "Quiz et blind test mélangés"], ["set", "Selon le quiz et les thèmes ci-dessous"]].map(function (_a) {
         var _b = __read(_a, 2), v = _b[0], l = _b[1];
         return "<option value=\"".concat(v, "\" ").concat((s.lmix || "alt") === v ? 'selected' : '', ">").concat(l, "</option>");
     }).join(""), "</select></label>\n      </div></fieldset>") : '', "\n    <label>Nom du bar<input type=\"text\" data-k=\"bar\" value=\"").concat(esc(s.bar), "\" maxlength=\"24\" placeholder=\"ex. Le Comptoir\"></label>\n    <label>Quiz<select data-k=\"quiz\"><option value=\"builtin\">Banque de questions (").concat(nb, "), au choix des th\u00E8mes</option>").concat(quizzes.map(function (z) { return "<option value=\"".concat(esc(z.id), "\" ").concat(s.quiz === z.id ? 'selected' : '', ">").concat(esc(z.name), " (").concat(z.n, ")</option>"); }).join(""), "</select></label>\n    <details class=\"scats\" ").concat(s.quiz === "builtin" ? '' : 'hidden', "><summary>Th\u00E8mes : <b class=\"th-sum\">").concat(esc(themeSummary(new Set(themesOf(s)))), "</b> <span class=\"muted\">(modifier)</span></summary>").concat(themePickerHTML(new Set(themesOf(s))), "</details>\n    <div class=\"srow\">\n      <label>Questions<select data-k=\"n\">").concat([5, 10, 15, 20, 25, 30, 40].map(function (v) { return "<option value=\"".concat(v, "\" ").concat(v === s.n ? 'selected' : '', ">").concat(v, "</option>"); }).join(""), "<option value=\"0\" ").concat(s.n === 0 ? 'selected' : '', ">Toutes</option></select></label>\n      <label>Temps<select data-k=\"time\">").concat([10, 15, 20, 30, 45, 60].map(function (v) { return "<option value=\"".concat(v, "\" ").concat(v === s.time ? 'selected' : '', ">").concat(v, " s</option>"); }).join(""), "</select></label>\n    </div>\n    <label class=\"tg\"><input type=\"checkbox\" data-k=\"auto\" ").concat(s.auto ? 'checked' : '', "> Encha\u00EEnement automatique</label>\n    <label class=\"tg\"><input type=\"checkbox\" data-k=\"sfx\" ").concat(s.sfx !== false ? 'checked' : '', "> \uD83D\uDD14 Bruitages (tic-tac, gong, tambour, applaudissements\u2026)</label>\n    <label class=\"vol\">\uD83C\uDFB5 Volume des extraits <input type=\"range\" data-k=\"vol\" min=\"0\" max=\"100\" step=\"5\" value=\"").concat(s.vol == null ? 100 : s.vol, "\"><b>").concat(s.vol == null ? 100 : s.vol, " %</b></label>\n    <label class=\"vol\">\uD83D\uDD14 Volume des bruitages <input type=\"range\" data-k=\"svol\" min=\"0\" max=\"100\" step=\"5\" value=\"").concat(s.svol == null ? 80 : s.svol, "\"><b>").concat(s.svol == null ? 80 : s.svol, " %</b></label>\n    <label class=\"tg\"><input type=\"checkbox\" data-k=\"mute\" ").concat(s.mute ? 'checked' : '', "> \uD83D\uDD07 Couper tout le son (extraits et bruitages)</label>\n    <label>\uD83D\uDD0A Son du blind test<select data-k=\"son\">").concat([["auto", "Automatique : écran casté s'il y en a un"], ["regie", "Ordinateur de l'animateur"], ["ecran", "Écran TV (fenêtre ou onglet casté)"]].map(function (_a) {
@@ -5788,8 +5845,9 @@ function applySetting(k, v) {
     else if (k === "lend")
         s.lend = [30, 60, 90, 120].includes(+v) ? +v : 60;
     else if (k === "lmix") {
-        s.lmix = ["alt", "quiz", "bt", "set"].includes(v) ? v : "alt";
+        s.lmix = ["alt", "quiz", "bt", "mix", "set"].includes(v) ? v : "alt";
         H.lnext = s.lmix === "alt" ? "quiz" : s.lmix;
+        delete s.pjk;
     }
     else if (k === "seenreset") {
         SEEN.reset();
@@ -5815,7 +5873,7 @@ function quizInfo() {
     var s = H.settings, z = curQuiz(), k = effKind();
     var th = new Set(curThemes()), total = z ? z.qs.length : bank().filter(function (q) { return th.has(q[0] + "/" + q[1]); }).length;
     var n = curN() ? Math.min(curN(), total) : total;
-    return "".concat(H.libre ? "🤖 Libre-service · " : "").concat(z ? z.name : k === "bt" ? "🎵 Blind test, toutes catégories" : k === "quiz" ? "🧠 Quiz, tous les thèmes" : "Banque : " + themeSummary(th), " \u00B7 ").concat(n, " question").concat(n > 1 ? 's' : '', " \u00B7 ").concat(s.time, " s").concat(z && z.source ? " · Questions : " + z.source : "");
+    return "".concat(H.libre ? "🤖 Libre-service · " : "").concat(z ? z.name : k === "bt" ? "🎵 Blind test, toutes catégories" : k === "quiz" ? "🧠 Quiz, tous les thèmes" : k === "mix" ? "🔀 Quiz + blind test, tous les thèmes" : "Banque : " + themeSummary(th), " \u00B7 ").concat(n, " question").concat(n > 1 ? 's' : '', " \u00B7 ").concat(s.time, " s").concat(z && z.source ? " · Questions : " + z.source : "");
 }
 var adminUrl = function () { return location.origin + location.pathname + "?room=" + H.code + "&admin=" + H.pin; };
 function openHostSettings() {
@@ -6718,9 +6776,142 @@ if (ADMIN_SIDE) {
         if (live && H.phase !== "lobby")
             saveGame();
         window.__leaving = true;
-        location.href = location.pathname + (QS.get("dev") ? "?dev=" + encodeURIComponent(QS.get("dev")) : "");
+        location.href = QS.has("projo") ? projoUrl("") : location.pathname + (QS.get("dev") ? "?dev=" + encodeURIComponent(QS.get("dev")) : "");
     });
 }
+/* ===================== VIDÉOPROJECTEUR (appli Android ou …/?projo) =====================
+   1re page : choix Quiz / Blind test → salle d'attente en libre-service avec le QR code. */
+function projoUrl(m, go) { return location.pathname + "?projo" + (m ? "=" + m : "") + (go ? "&go=" + go : "") + (QS.get("dev") ? "&dev=" + encodeURIComponent(QS.get("dev")) : ""); }
+function projoGo(m, go) { window.__leaving = true; location.href = projoUrl(m, go); }
+var PJ_KINDS = { quiz: { ic: "🧠", t: "Quiz", d: "Culture générale" }, bt: { ic: "🎵", t: "Blind test", d: "Extraits musicaux" }, mix: { ic: "🔀", t: "Les deux", d: "Questions et musiques mélangées" } };
+var PJ_N = [5, 10, 15, 20, 25, 30], PJ_T = [10, 15, 20, 30, 45, 60];
+/* catégories proposées selon le type de jeu (sans les thèmes alcool, loi Évin) */
+function pjCats(kind) {
+    var n = {};
+    bank().forEach(function (q) { var t = q[0] + "/" + q[1]; if (!ALC_THEMES.includes(t))
+        n[q[0]] = (n[q[0]] || 0) + 1; });
+    var lab = function (k) { var x = CATS[k].replace(/^Blind test /, ""); if (/^\d+$/.test(x))
+        x = "Années " + x; return x.charAt(0).toUpperCase() + x.slice(1); };
+    return Object.keys(CATS).filter(function (k) { return n[k] && (kind === "mix" || (kind === "bt") === BLIND.includes(k)); }).map(function (k) { return ({ k: k, label: lab(k), n: n[k], bt: BLIND.includes(k) }); });
+}
+var pjThemesOf = function (cats) { return ALL_THEMES().filter(function (t) { return cats.includes(t.split("/")[0]) && !ALC_THEMES.includes(t); }); };
+function projoStart(mode) {
+    document.documentElement.classList.add("projo", "kbnav");
+    var s = H.settings, go = QS.get("go") || "";
+    var sv = store.get(SAVE_KEY, null), canResume = !!(sv && sv.libre && sv.phase && sv.phase !== "lobby" && Date.now() - sv.at < 6 * 3600e3);
+    if (mode === "reprise" && canResume) {
+        startHost(sv);
+        return;
+    }
+    if (PJ_KINDS[mode] && go) {
+        store.del(SAVE_KEY);
+        H.libre = true;
+        s.quiz = "builtin";
+        if (go === "perso" && s.pj && s.pj.kind === mode && s.pj.cats && s.pj.cats.length) {
+            s.lmix = "set";
+            s.pjk = mode;
+            s.themes = pjThemesOf(s.pj.cats);
+            s.n = s.pj.n;
+            s.time = s.pj.time;
+            H.lnext = "set";
+        }
+        else {
+            s.lmix = mode;
+            s.pjk = mode;
+            s.time = 20;
+            s.lnq = s.lnq || 15;
+            s.lnb = s.lnb || 10;
+            H.lnext = mode;
+        }
+        saveSettings();
+        startHost(null, "ecran");
+        return;
+    }
+    var focus = function (id) { return setTimeout(function () { var b = document.getElementById(id); if (b)
+        try {
+            b.focus();
+        }
+        catch (e) { } SNAV.last = null; }, 60); };
+    var foot = "<p class=\"pj-hint\">Fl\u00E8ches de la t\u00E9l\u00E9commande pour choisir, <b>OK</b> pour valider, <b>Retour</b> pour revenir</p>";
+    // 1) type de jeu
+    if (!PJ_KINDS[mode]) {
+        window.__pjBack = null;
+        app.innerHTML = "<div class=\"pj\"><img class=\"logo pj-logo\" src=\"logo.png\" alt=\"TuL\u2019asOuPas ?\">\n      <h1 class=\"pj-h\">\u00C0 quoi on joue ?</h1>\n      <div class=\"pj-choices n3\">".concat(Object.entries(PJ_KINDS).map(function (_a) {
+            var _b = __read(_a, 2), k = _b[0], v = _b[1];
+            return "<button class=\"pj-btn pj-".concat(k, "\" id=\"pj-").concat(k, "\" type=\"button\"><span class=\"pj-ic\">").concat(v.ic, "</span><b>").concat(v.t, "</b><small>").concat(v.d, "</small></button>");
+        }).join(""), "</div>\n      ").concat(canResume ? '<button class="btn ghost pj-res" id="pjr" type="button">♻️ Reprendre la partie en cours</button>' : '', "\n      ").concat(foot, "<p class=\"evin pj-evin\">").concat(EVIN, "</p></div>");
+        Object.keys(PJ_KINDS).forEach(function (k) { $("#pj-" + k).onclick = function () { return projoGo(k); }; });
+        if ($("#pjr"))
+            $("#pjr").onclick = function () { return projoGo("reprise"); };
+        focus("pj-quiz");
+        return;
+    }
+    var K = PJ_KINDS[mode], nQ = mode === "bt" ? (s.lnb || 10) : (s.lnq || 15);
+    // 2) partie rapide ou personnalisée
+    var step2 = function () {
+        window.__pjBack = null;
+        app.innerHTML = "<div class=\"pj\"><img class=\"logo pj-logo sm\" src=\"logo.png\" alt=\"TuL\u2019asOuPas ?\">\n      <h1 class=\"pj-h\"><span class=\"pj-hi\">".concat(K.ic, "</span> ").concat(K.t, "</h1>\n      <div class=\"pj-choices\">\n        <button class=\"pj-btn pj-fast\" id=\"pjf\" type=\"button\"><span class=\"pj-ic\">\u26A1</span><b>Partie rapide</b><small>").concat(mode === "bt" ? "Musiques" : mode === "mix" ? "Questions et musiques" : "Questions", " au hasard \u00B7 ").concat(nQ, " ").concat(mode === "bt" ? "extraits" : "questions", " \u00B7 20 s</small></button>\n        <button class=\"pj-btn pj-perso\" id=\"pjp\" type=\"button\"><span class=\"pj-ic\">\uD83C\uDF9B\uFE0F</span><b>Personnaliser</b><small>Th\u00E8mes, nombre de questions, temps de r\u00E9ponse</small></button>\n      </div>").concat(foot, "</div>");
+        $("#pjf").onclick = function () { return projoGo(mode, "rapide"); };
+        $("#pjp").onclick = perso;
+        focus("pjf");
+    };
+    // 3) personnalisation : thèmes, nombre, temps
+    var perso = function () {
+        var cats = pjCats(mode), prev = s.pj && s.pj.kind === mode ? s.pj : null;
+        var st = { cats: new Set(prev && prev.cats ? prev.cats.filter(function (k) { return cats.some(function (c) { return c.k === k; }); }) : cats.map(function (c) { return c.k; })), n: prev ? prev.n : nQ, time: prev ? prev.time : 20 };
+        window.__pjBack = step2;
+        var grp = function (list, title) { return list.length ? "<div class=\"pj-grp\">".concat(title ? "<h3>".concat(title, "</h3>") : '', "<div class=\"pj-cats\">").concat(list.map(function (c) { return "<button type=\"button\" class=\"pj-cat ".concat(c.bt ? 'bt' : '', "\" data-k=\"").concat(c.k, "\" aria-pressed=\"false\"><span>").concat(esc(c.label), "</span><small>").concat(c.n, "</small></button>"); }).join(""), "</div></div>") : ''; };
+        app.innerHTML = "<div class=\"pj pj-perso-pg ".concat(mode, "\"><div class=\"pj-top\"><img class=\"logo pj-logo xs\" src=\"logo.png\" alt=\"\"><h1 class=\"pj-h\"><span class=\"pj-hi\">").concat(K.ic, "</span> ").concat(K.t, " \u00B7 personnaliser</h1></div>\n      <div class=\"pj-box\">\n        <div class=\"pj-row\"><h2>Th\u00E8mes</h2><button type=\"button\" class=\"pj-mini\" id=\"pjall\">Tout</button><button type=\"button\" class=\"pj-mini\" id=\"pjnone\">Aucun</button><span class=\"pj-count\" id=\"pjcnt\"></span></div>\n        ").concat(mode === "mix" ? grp(cats.filter(function (c) { return !c.bt; }), "🧠 Questions") + grp(cats.filter(function (c) { return c.bt; }), "🎵 Musiques") : grp(cats, ""), "\n        <div class=\"pj-row2\">\n          <div><h2>").concat(mode === "bt" ? "Nombre d'extraits" : "Nombre de questions", "</h2><div class=\"pj-seg\" id=\"pjn\">").concat(PJ_N.map(function (v) { return "<button type=\"button\" data-v=\"".concat(v, "\">").concat(v, "</button>"); }).join(""), "</div></div>\n          <div><h2>Temps de r\u00E9ponse</h2><div class=\"pj-seg\" id=\"pjt\">").concat(PJ_T.map(function (v) { return "<button type=\"button\" data-v=\"".concat(v, "\">").concat(v, " s</button>"); }).join(""), "</div></div>\n        </div>\n      </div>\n      <button class=\"btn pj-go\" id=\"pjgo\" type=\"button\">\u25B6 Ouvrir la salle d'attente</button>").concat(foot, "</div>");
+        var sync = function () {
+            app.querySelectorAll(".pj-cat").forEach(function (b) { var on = st.cats.has(b.dataset.k); b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); });
+            app.querySelectorAll("#pjn button").forEach(function (b) { return b.classList.toggle("on", +b.dataset.v === st.n); });
+            app.querySelectorAll("#pjt button").forEach(function (b) { return b.classList.toggle("on", +b.dataset.v === st.time); });
+            var th = new Set(pjThemesOf(__spreadArray([], __read(st.cats), false))), avail = bank().filter(function (q) { return th.has(q[0] + "/" + q[1]); }).length;
+            $("#pjcnt").textContent = st.cats.size ? "".concat(avail, " disponible").concat(avail > 1 ? 's' : '') : "Choisissez au moins un thème";
+            $("#pjgo").disabled = !st.cats.size || !avail;
+            s.pj = { kind: mode, cats: __spreadArray([], __read(st.cats), false), n: st.n, time: st.time };
+            saveSettings(); // choix gardés même après Retour
+        };
+        app.querySelectorAll(".pj-cat").forEach(function (b) { return b.onclick = function () { var k = b.dataset.k; st.cats.has(k) ? st.cats.delete(k) : st.cats.add(k); sync(); }; });
+        $("#pjall").onclick = function () { cats.forEach(function (c) { return st.cats.add(c.k); }); sync(); };
+        $("#pjnone").onclick = function () { st.cats.clear(); sync(); };
+        app.querySelectorAll("#pjn button").forEach(function (b) { return b.onclick = function () { st.n = +b.dataset.v; sync(); }; });
+        app.querySelectorAll("#pjt button").forEach(function (b) { return b.onclick = function () { st.time = +b.dataset.v; sync(); }; });
+        $("#pjgo").onclick = function () { s.pj = { kind: mode, cats: __spreadArray([], __read(st.cats), false), n: st.n, time: st.time }; saveSettings(); projoGo(mode, "perso"); };
+        sync();
+        focus("pjgo");
+    };
+    step2();
+}
+/* touche Retour de la télécommande (appli Android) : fermer une fenêtre, revenir au choix du jeu, ou quitter */
+window.__tvBack = function () {
+    if (document.querySelector(".modal")) {
+        SNAV.back();
+        return "handled";
+    }
+    if (QS.has("projo") && !QS.get("projo"))
+        return "exit";
+    if (typeof window.__pjBack === "function") {
+        window.__pjBack();
+        return "handled";
+    }
+    var live = typeof H !== "undefined" && H.code && ["question", "reveal", "leaderboard"].includes(H.phase);
+    if (live) {
+        if (Date.now() - (window.__bk || 0) < 3000) {
+            try {
+                saveGame();
+            }
+            catch (e) { }
+            projoGo("");
+            return "handled";
+        }
+        window.__bk = Date.now();
+        toast("Appuyez encore sur Retour pour quitter la partie (elle reste sauvegardée)");
+        return "handled";
+    }
+    projoGo("");
+    return "handled";
+};
 /* ===================== TÉLÉCOMMANDE DE TV : navigation de bouton en bouton =====================
    Flèches = passer au bouton voisin dans la direction, OK / Entrée = cliquer, Retour = fermer la fenêtre ouverte.
    Sur une liste déroulante : ◀ ▶ changent la valeur. Fonctionne sur l'accueil, l'écran TV et les réglages. */
@@ -6906,6 +7097,8 @@ else if (QS.get("tv"))
     remoteTV(QS.get("tv"));
 else if (QS.has("host"))
     startHost(null, "ecran");
+else if (QS.has("projo"))
+    projoStart(QS.get("projo") || "");
 else if (QS.has("libre")) {
     var sv = store.get(SAVE_KEY, null);
     if (sv && sv.libre && sv.phase && Date.now() - sv.at < 6 * 3600e3)
