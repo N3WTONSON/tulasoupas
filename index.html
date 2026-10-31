@@ -4181,7 +4181,7 @@ function displayState() {
     var r = ranking(), q = H.qs[H.qi], showCorrect = H.phase === "reveal" || H.phase === "leaderboard";
     return { t: "dstate", code: H.code, url: joinUrl(), phase: H.phase, view: H.view || "", online: H.online, turn: HAS_TURN, info: quizInfo(), src: H.src || "",
         time: H.settings.time, ctl: H.mode === "ecran", auto: !!(H.settings.auto || H.libre),
-        libre: H.libre ? Object.assign(libreInfo(), { end: H.phase === "end" && H.lendAt ? Math.max(0, H.lendAt - Date.now()) : null }) : null, paused: !!H.paused, gid: H.gid || "", sfx: H.settings.sfx !== false, mute: !!H.settings.mute, vol: H.settings.vol == null ? 100 : H.settings.vol, svol: H.settings.svol == null ? 80 : H.settings.svol, zap: H.phase === "leaderboard" ? H.zap || null : null, rsfx: H.phase === "reveal" && q ? q.sfx || "" : "",
+        libre: H.libre ? Object.assign(libreInfo(), { end: H.phase === "end" && H.lendAt ? Math.max(0, H.lendAt - Date.now()) : null }) : null, paused: !!H.paused, gid: H.gid || "", sfx: H.settings.sfx !== false, mus: H.settings.mus !== false, mvol: H.settings.mvol == null ? 60 : H.settings.mvol, mute: !!H.settings.mute, vol: H.settings.vol == null ? 100 : H.settings.vol, svol: H.settings.svol == null ? 80 : H.settings.svol, zap: H.phase === "leaderboard" ? H.zap || null : null, rsfx: H.phase === "reveal" && q ? q.sfx || "" : "",
         players: r.map(function (p) { return ({ pid: p.pid, name: p.name, av: p.av, col: p.col, on: p.connected, score: p.score, rank: p.rank, gain: H.lastGain.get(p.pid) || 0, rd: !!p.ready, idle: idleLeft(p), ans: H.answers.has(p.pid) }); }),
         qi: H.qi, total: H.qs.length, q: q ? { c: q.c, q: q.q, info: q.info || "", alc: !!q.alc, yt: q.yt || "", yt2: q.yt2 || "", ys: q.ys || 0, yd: ytDur(), dz: q.dz || null, dzo: !!q.dzo, img: q.img || "", full: showCorrect ? q.full || "" : "", choices: q.choices, correct: showCorrect ? q.correct : -1 } : null, ytn: H.ytN || 0, nx: nxYt(), nxImg: (H.qs[H.qi + 1] || {}).img || "", ytHere: H.mode === "regie" ? (sndTarget() === "ecran" && H.ytFb !== H.qi) : (sndTarget() === "host" || H.ytFb === H.qi), snd: sndTarget(), counts: counts, answered: H.answers.size, connected: connectedCount(),
         endsIn: H.phase === "question" ? leftMs() : 0, wait: H.phase === "question" && H.ytWait, board: boardDue(),
@@ -4464,6 +4464,135 @@ function sfxGong(left, here, key) {
         SFX.get("gong");
 }
 /* podium final : acclamations de la foule ; dévoilement : boing / trombone */
+/* ---- musiques d'ambiance (dossier sons/) : salle d'attente, départ, réflexion (quiz), classement, podium ----
+   jouées là où sort le son du blind test, jamais pendant un extrait */
+var MUS = {
+    files: { salle: "sons/musique-salle.mp3", depart: "sons/jingle-depart.mp3", reflexion: "sons/musique-reflexion.mp3", classement: "sons/musique-classement.mp3", podium: "sons/musique-podium.mp3" },
+    gain: { salle: .8, depart: 1, reflexion: .45, classement: .9, podium: 1 },
+    a: {}, ft: {}, vol: .6, keys: {}, last: null, blocked: false,
+    get: function (k) {
+        if (!this.a[k]) {
+            var a = new Audio(this.files[k]);
+            a.preload = "auto";
+            a.loop = k === "salle" || k === "reflexion";
+            a.volume = 0;
+            if (!a.loop)
+                a.addEventListener("ended", function () { if (MUS.last)
+                    musSync.apply(null, MUS.last); }); // fin du jingle : la musique suivante démarre tout de suite
+            this.a[k] = a;
+        }
+        return this.a[k];
+    },
+    fade: function (k, to, ms, pause) {
+        var _this = this;
+        var a = this.a[k];
+        if (!a)
+            return;
+        clearInterval(this.ft[k]);
+        var from = a.volume, t0 = Date.now();
+        this.ft[k] = setInterval(function () { var p = Math.min(1, (Date.now() - t0) / ms); try {
+            a.volume = Math.max(0, Math.min(1, from + (to - from) * p));
+        }
+        catch (e) { } if (p >= 1) {
+            clearInterval(_this.ft[k]);
+            if (pause)
+                try {
+                    a.pause();
+                }
+                catch (e) { }
+        } }, 40);
+    },
+    playing: function (k) { var a = this.a[k]; return !!(a && !a.paused && !a.ended); },
+    start: function (k, fromStart) {
+        var a = this.get(k);
+        if (fromStart)
+            try {
+                a.currentTime = 0;
+            }
+            catch (e) { }
+        if (a.paused || a.ended) {
+            a.volume = 0;
+            var pr = a.play();
+            if (pr && pr.catch)
+                pr.catch(function (e) { if (e && e.name === "NotAllowedError")
+                    MUS.blocked = true; });
+        }
+        this.fade(k, Math.min(1, this.vol * (this.gain[k] || 1)), 700);
+    },
+    stop: function (k, ms) { if (this.playing(k))
+        this.fade(k, 0, ms == null ? 600 : ms, true);
+    else {
+        var a = this.a[k];
+        if (a)
+            try {
+                a.pause();
+            }
+            catch (e) { }
+    } },
+    stopAll: function (ms) {
+        var _this = this;
+        Object.keys(this.a).forEach(function (k) { return _this.stop(k, ms); });
+    }
+};
+/* le navigateur bloque le son avant le premier clic / la première touche : on relance la musique dès que possible */
+["pointerdown", "keydown", "touchstart"].forEach(function (ev) { return document.addEventListener(ev, function () { if (MUS.blocked && MUS.last) {
+    MUS.blocked = false;
+    musSync.apply(null, MUS.last);
+} }, true); });
+function musSync(phase, qi, here, gid, on, vol, blind, wait, zap) {
+    MUS.last = [phase, qi, here, gid, on, vol, blind, wait, zap];
+    MUS.vol = vol == null ? .6 : vol;
+    if (!here || on === false || MUS.vol <= 0) {
+        MUS.stopAll(300);
+        MUS.lbReplace = false;
+        return;
+    }
+    MUS.lbReplace = true; // le classement a sa musique : pas de roulement de tambour en plus
+    var g = gid || "";
+    // jingle de départ sur la 1re question (coupé dès qu'un extrait de blind test démarre)
+    if (phase === "question" && qi === 0 && MUS.keys.dep !== g) {
+        MUS.keys.dep = g;
+        MUS.start("depart", true);
+    }
+    var dep = MUS.playing("depart") && phase === "question" && qi === 0 && !(blind && !wait);
+    if (!dep)
+        MUS.stop("depart", blind ? 300 : 600);
+    var want = {
+        salle: phase === "lobby",
+        reflexion: phase === "question" && !blind && !dep,
+        classement: phase === "leaderboard",
+        podium: phase === "end"
+    };
+    Object.keys(want).forEach(function (k) {
+        if (!want[k]) {
+            MUS.stop(k);
+            return;
+        }
+        if (k === "classement") {
+            var key = g + "|" + qi;
+            if (MUS.keys.lb !== key) {
+                MUS.keys.lb = key;
+                clearTimeout(MUS.lbt);
+                MUS.lbt = setTimeout(function () { return MUS.start("classement", true); }, zap ? ZAP_MS : 0);
+            }
+            else if (MUS.playing(k))
+                MUS.fade(k, Math.min(1, MUS.vol * MUS.gain[k]), 300);
+            return;
+        }
+        if (k === "podium") {
+            if (MUS.keys.pod !== g) {
+                MUS.keys.pod = g;
+                MUS.start("podium", true);
+            }
+            else if (MUS.playing(k))
+                MUS.fade(k, Math.min(1, MUS.vol * MUS.gain[k]), 300);
+            return;
+        }
+        MUS.start(k, false);
+    });
+    if (phase !== "leaderboard")
+        clearTimeout(MUS.lbt);
+}
 function sfxSync(phase, qi, here, gid, rsfx, on, vol, zap) {
     SFX.vol = vol == null ? 0.8 : vol;
     SFX.on = on !== false && SFX.vol > 0;
@@ -4495,9 +4624,10 @@ function sfxSync(phase, qi, here, gid, rsfx, on, vol, zap) {
             clearTimeout(SFX.lbt);
             if (zap) {
                 SFX.play("eclair");
-                SFX.lbt = setTimeout(function () { return SFX.play("roulement"); }, ZAP_MS);
+                if (!MUS.lbReplace)
+                    SFX.lbt = setTimeout(function () { return SFX.play("roulement"); }, ZAP_MS);
             }
-            else
+            else if (!MUS.lbReplace)
                 SFX.play("roulement");
         }
     }
@@ -4742,6 +4872,7 @@ function renderDisplay(T) {
     if (T.q && T.q.img)
         picPreload(T.q.img);
     fitTV();
+    musSync(T.phase, T.qi, T.ytHere !== false && !(T.view === "season" && T.season), T.gid, T.mus !== false && !T.mute, T.mute ? 0 : (T.mvol == null ? 60 : T.mvol) / 100, !!(T.q && T.q.yt), !!T.wait, !!T.zap);
     sfxSync(T.phase, T.qi, T.ytHere !== false && !(T.view === "season" && T.season), T.gid, T.rsfx, T.sfx && !T.mute, T.mute ? 0 : (T.svol == null ? 80 : T.svol) / 100, !!T.zap);
     if (T.ytHere !== false && (T.board || T.phase === "leaderboard"))
         SFX.get("roulement");
@@ -5748,7 +5879,7 @@ function settingsHTML(s, quizzes, nb, libre) {
     return "<div class=\"sform\">\n    ".concat(libre ? "<fieldset class=\"prizes lset\"><legend>\uD83E\uDD16 Libre-service (sans animateur)</legend>\n      <div class=\"srow\">\n        <label>Joueurs pour lancer<select data-k=\"lmin\">".concat([1, 2, 3, 4, 5, 6].map(function (v) { return "<option value=\"".concat(v, "\" ").concat(v === (s.lmin || 2) ? 'selected' : '', ">").concat(v, "</option>"); }).join(""), "</select></label>\n        <label>\u00C9cran de fin<select data-k=\"lend\">").concat([30, 60, 90, 120].map(function (v) { return "<option value=\"".concat(v, "\" ").concat(v === (s.lend || 60) ? 'selected' : '', ">").concat(v, " s</option>"); }).join(""), "</select></label>\n      </div>\n      <div class=\"srow\">\n        <label>Questions par quiz<select data-k=\"lnq\">").concat([5, 10, 15, 20, 25, 30].map(function (v) { return "<option value=\"".concat(v, "\" ").concat(v === (s.lnq || 15) ? 'selected' : '', ">").concat(v, "</option>"); }).join(""), "</select></label>\n        <label>Extraits par blind test<select data-k=\"lnb\">").concat([5, 10, 15, 20, 25, 30].map(function (v) { return "<option value=\"".concat(v, "\" ").concat(v === (s.lnb || 10) ? 'selected' : '', ">").concat(v, "</option>"); }).join(""), "</select></label>\n      </div>\n      <div class=\"srow\">\n        <label>Parties<select data-k=\"lmix\">").concat([["alt", "Quiz et blind test en alternance"], ["quiz", "Quiz uniquement"], ["bt", "Blind test uniquement"], ["mix", "Quiz et blind test mélangés"], ["set", "Selon le quiz et les thèmes ci-dessous"]].map(function (_a) {
         var _b = __read(_a, 2), v = _b[0], l = _b[1];
         return "<option value=\"".concat(v, "\" ").concat((s.lmix || "alt") === v ? 'selected' : '', ">").concat(l, "</option>");
-    }).join(""), "</select></label>\n      </div></fieldset>") : '', "\n    <label>Nom du bar<input type=\"text\" data-k=\"bar\" value=\"").concat(esc(s.bar), "\" maxlength=\"24\" placeholder=\"ex. Le Comptoir\"></label>\n    <label>Quiz<select data-k=\"quiz\"><option value=\"builtin\">Banque de questions (").concat(nb, "), au choix des th\u00E8mes</option>").concat(quizzes.map(function (z) { return "<option value=\"".concat(esc(z.id), "\" ").concat(s.quiz === z.id ? 'selected' : '', ">").concat(esc(z.name), " (").concat(z.n, ")</option>"); }).join(""), "</select></label>\n    <details class=\"scats\" ").concat(s.quiz === "builtin" ? '' : 'hidden', "><summary>Th\u00E8mes : <b class=\"th-sum\">").concat(esc(themeSummary(new Set(themesOf(s)))), "</b> <span class=\"muted\">(modifier)</span></summary>").concat(themePickerHTML(new Set(themesOf(s))), "</details>\n    <div class=\"srow\">\n      <label>Questions<select data-k=\"n\">").concat([5, 10, 15, 20, 25, 30, 40].map(function (v) { return "<option value=\"".concat(v, "\" ").concat(v === s.n ? 'selected' : '', ">").concat(v, "</option>"); }).join(""), "<option value=\"0\" ").concat(s.n === 0 ? 'selected' : '', ">Toutes</option></select></label>\n      <label>Temps<select data-k=\"time\">").concat([10, 15, 20, 30, 45, 60].map(function (v) { return "<option value=\"".concat(v, "\" ").concat(v === s.time ? 'selected' : '', ">").concat(v, " s</option>"); }).join(""), "</select></label>\n    </div>\n    <label class=\"tg\"><input type=\"checkbox\" data-k=\"auto\" ").concat(s.auto ? 'checked' : '', "> Encha\u00EEnement automatique</label>\n    <label class=\"tg\"><input type=\"checkbox\" data-k=\"sfx\" ").concat(s.sfx !== false ? 'checked' : '', "> \uD83D\uDD14 Bruitages (tic-tac, gong, tambour, applaudissements\u2026)</label>\n    <label class=\"vol\">\uD83C\uDFB5 Volume des extraits <input type=\"range\" data-k=\"vol\" min=\"0\" max=\"100\" step=\"5\" value=\"").concat(s.vol == null ? 100 : s.vol, "\"><b>").concat(s.vol == null ? 100 : s.vol, " %</b></label>\n    <label class=\"vol\">\uD83D\uDD14 Volume des bruitages <input type=\"range\" data-k=\"svol\" min=\"0\" max=\"100\" step=\"5\" value=\"").concat(s.svol == null ? 80 : s.svol, "\"><b>").concat(s.svol == null ? 80 : s.svol, " %</b></label>\n    <label class=\"tg\"><input type=\"checkbox\" data-k=\"mute\" ").concat(s.mute ? 'checked' : '', "> \uD83D\uDD07 Couper tout le son (extraits et bruitages)</label>\n    <label>\uD83D\uDD0A Son du blind test<select data-k=\"son\">").concat([["auto", "Automatique : écran casté s'il y en a un"], ["regie", "Ordinateur de l'animateur"], ["ecran", "Écran TV (fenêtre ou onglet casté)"]].map(function (_a) {
+    }).join(""), "</select></label>\n      </div></fieldset>") : '', "\n    <label>Nom du bar<input type=\"text\" data-k=\"bar\" value=\"").concat(esc(s.bar), "\" maxlength=\"24\" placeholder=\"ex. Le Comptoir\"></label>\n    <label>Quiz<select data-k=\"quiz\"><option value=\"builtin\">Banque de questions (").concat(nb, "), au choix des th\u00E8mes</option>").concat(quizzes.map(function (z) { return "<option value=\"".concat(esc(z.id), "\" ").concat(s.quiz === z.id ? 'selected' : '', ">").concat(esc(z.name), " (").concat(z.n, ")</option>"); }).join(""), "</select></label>\n    <details class=\"scats\" ").concat(s.quiz === "builtin" ? '' : 'hidden', "><summary>Th\u00E8mes : <b class=\"th-sum\">").concat(esc(themeSummary(new Set(themesOf(s)))), "</b> <span class=\"muted\">(modifier)</span></summary>").concat(themePickerHTML(new Set(themesOf(s))), "</details>\n    <div class=\"srow\">\n      <label>Questions<select data-k=\"n\">").concat([5, 10, 15, 20, 25, 30, 40].map(function (v) { return "<option value=\"".concat(v, "\" ").concat(v === s.n ? 'selected' : '', ">").concat(v, "</option>"); }).join(""), "<option value=\"0\" ").concat(s.n === 0 ? 'selected' : '', ">Toutes</option></select></label>\n      <label>Temps<select data-k=\"time\">").concat([10, 15, 20, 30, 45, 60].map(function (v) { return "<option value=\"".concat(v, "\" ").concat(v === s.time ? 'selected' : '', ">").concat(v, " s</option>"); }).join(""), "</select></label>\n    </div>\n    <label class=\"tg\"><input type=\"checkbox\" data-k=\"auto\" ").concat(s.auto ? 'checked' : '', "> Encha\u00EEnement automatique</label>\n    <label class=\"tg\"><input type=\"checkbox\" data-k=\"sfx\" ").concat(s.sfx !== false ? 'checked' : '', "> \uD83D\uDD14 Bruitages (tic-tac, gong, tambour, applaudissements\u2026)</label>\n    <label class=\"tg\"><input type=\"checkbox\" data-k=\"mus\" ").concat(s.mus !== false ? 'checked' : '', "> \uD83C\uDFB6 Musiques d'ambiance (salle d'attente, r\u00E9flexion, classement, podium)</label>\n    <label class=\"vol\">\uD83C\uDFB6 Volume des musiques <input type=\"range\" data-k=\"mvol\" min=\"0\" max=\"100\" step=\"5\" value=\"").concat(s.mvol == null ? 60 : s.mvol, "\"><b>").concat(s.mvol == null ? 60 : s.mvol, " %</b></label>\n    <label class=\"vol\">\uD83C\uDFB5 Volume des extraits <input type=\"range\" data-k=\"vol\" min=\"0\" max=\"100\" step=\"5\" value=\"").concat(s.vol == null ? 100 : s.vol, "\"><b>").concat(s.vol == null ? 100 : s.vol, " %</b></label>\n    <label class=\"vol\">\uD83D\uDD14 Volume des bruitages <input type=\"range\" data-k=\"svol\" min=\"0\" max=\"100\" step=\"5\" value=\"").concat(s.svol == null ? 80 : s.svol, "\"><b>").concat(s.svol == null ? 80 : s.svol, " %</b></label>\n    <label class=\"tg\"><input type=\"checkbox\" data-k=\"mute\" ").concat(s.mute ? 'checked' : '', "> \uD83D\uDD07 Couper tout le son (extraits et bruitages)</label>\n    <label>\uD83D\uDD0A Son du blind test<select data-k=\"son\">").concat([["auto", "Automatique : écran casté s'il y en a un"], ["regie", "Ordinateur de l'animateur"], ["ecran", "Écran TV (fenêtre ou onglet casté)"]].map(function (_a) {
         var _b = __read(_a, 2), v = _b[0], l = _b[1];
         return "<option value=\"".concat(v, "\" ").concat((s.son || "auto") === v ? 'selected' : '', ">").concat(l, "</option>");
     }).join(""), "</select></label>\n    <label class=\"tg\"><input type=\"checkbox\" data-k=\"hideQ\" ").concat(s.hideQ ? 'checked' : '', "> Question seulement sur la TV (anti-triche)</label>\n    <label class=\"tg\"><input type=\"checkbox\" data-k=\"btTitle\" ").concat(s.btTitle ? 'checked' : '', "> \uD83C\uDFB5 Blind test : titre seulement, sans le nom de l'artiste <small class=\"muted\">(prochaine partie)</small></label>\n    <label class=\"tg\"><input type=\"checkbox\" data-k=\"season\" ").concat(s.season !== false ? 'checked' : '', "> Compter les points pour la saison</label>\n    <fieldset class=\"prizes\"><legend>\uD83C\uDF81 Lots \u00E0 gagner <span class=\"muted\">(facultatif, affich\u00E9s sur la TV)</span></legend>\n      ").concat(["🥇 1er", "🥈 2e", "🥉 3e"].map(function (l, i) { return "<label class=\"prz\"><span>".concat(l, "</span><input type=\"text\" data-k=\"prize").concat(i + 1, "\" value=\"").concat(esc(((s.prizes || [])[i]) || ""), "\" maxlength=\"60\" placeholder=\"ex. ").concat(["Un cocktail sans alcool maison", "Une planche à partager", "Un café gourmand"][i], "\"></label>"); }).join(""), "\n    </fieldset>\n  </div>");
@@ -5800,6 +5931,7 @@ function renderRegie() {
         A.endsAt = Date.now() + A.st.endsIn;
     renderRemote();
     var s = A.st, hs = H.settings;
+    musSync(s.phase, s.qi, sndTarget() === "regie", H.gid, hs.mus !== false && !hs.mute, hs.mute ? 0 : (hs.mvol == null ? 60 : hs.mvol) / 100, !!(s.q && s.q.yt), !!s.wait, !!H.zap && s.phase === "leaderboard");
     sfxSync(s.phase, s.qi, sndTarget() === "regie", H.gid, s.rsfx, hs.sfx !== false && !hs.mute, hs.mute ? 0 : (hs.svol == null ? 80 : hs.svol) / 100, !!H.zap && s.phase === "leaderboard");
     if (sndTarget() === "regie") {
         SFX.get("roulement");
@@ -5820,9 +5952,9 @@ function applySetting(k, v) {
         s.n = [0, 5, 10, 15, 20, 25, 30, 40].includes(+v) ? +v : 15;
     else if (k === "time")
         s.time = [10, 15, 20, 30, 45, 60].includes(+v) ? +v : 20;
-    else if (k === "auto" || k === "hideQ" || k === "season" || k === "sfx" || k === "mute" || k === "btTitle")
+    else if (k === "auto" || k === "hideQ" || k === "season" || k === "sfx" || k === "mute" || k === "btTitle" || k === "mus")
         s[k] = !!v;
-    else if (k === "vol" || k === "svol")
+    else if (k === "vol" || k === "svol" || k === "mvol")
         s[k] = Math.max(0, Math.min(100, Math.round(+v || 0)));
     else if (k === "son") {
         s.son = ["auto", "regie", "ecran"].includes(v) ? v : "auto";
